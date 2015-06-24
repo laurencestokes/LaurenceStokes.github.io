@@ -286,6 +286,11 @@ footer {
   border-top: 2px solid $darkGray;
   //border-bottom: 1px solid #ddd;
   //background-color: $lightGray;
+  
+  p{
+	font-size: smaller;
+	padding-top: 5px;
+   }
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
