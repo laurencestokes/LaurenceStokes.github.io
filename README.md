@@ -12,4 +12,4 @@
 
 ##License: 
 
-MIT. Feel free to copy my site (which itself is essentially a fork of the Jekll Now theme, also MIT).
+MIT. Feel free to copy my site (which itself is essentially a fork of the JekllyNow theme, also MIT).
