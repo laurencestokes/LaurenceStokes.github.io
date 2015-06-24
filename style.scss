@@ -197,7 +197,8 @@ img {
   font-family: $fjalla;
   font-weight: 300;
   font-size: 42px;
-  letter-spacing: 1px;
+  //letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .site-description {
