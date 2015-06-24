@@ -1,6 +1,6 @@
 #My Website 
 
-**[Live Version]**(http://laurencestokes.github.io/)
+**[Live Version](http://laurencestokes.github.io/)**
 
 ##Technologies: 
 
