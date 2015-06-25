@@ -11,13 +11,15 @@ In this blog post I’m going to dissect Tor (previously an acronym for The Onio
 
 A few key terms before we begin:
 
-*Asymmetric Cryptography:* (aka public key cryptography): Essentially a cryptographic system that uses two keys, public and private. The sender encrypts their message with the recipients public key (which is public), and the recipient decrypts the message using their private key, known only to them.
+**Asymmetric Cryptography:** (aka public key cryptography): Essentially a cryptographic system that uses two keys, public and private. The sender encrypts their message with the recipients public key (which is public), and the recipient decrypts the message using their private key, known only to them.
 
-*Symmetric Cryptography:* The same key is used for both encryption AND decryption. The drawback of symmetric key encryption is distributing the key to both parties.
+**Symmetric Cryptography:** The same key is used for both encryption AND decryption. The drawback of symmetric key encryption is distributing the key to both parties.
 
-Transport Layer Security:* TLS (now superseded by SSL - *Secure Sockets Layer*) is protocol to provide privacy and data integrity between two communicating applications: it adopts asymmetric cryptography using X.509 certificates for mutual authentication and to establish a symmetric key to encrypt further communication.
+**Transport Layer Security:** TLS (now superseded by SSL - *Secure Sockets Layer*) is protocol to provide privacy and data integrity between two communicating applications: it adopts asymmetric cryptography using X.509 certificates for mutual authentication and to establish a symmetric key to encrypt further communication.
 
-*Diffie-Hellman:* Diffie-Hellman is a key-exchange protocol for setting up a secret symmetric key over an insecure channel. Once the key is established, the two parties wishing to communicate can do so with symmetric encryption using the shared key.
+**Diffie-Hellman:** Diffie-Hellman is a key-exchange protocol for setting up a secret symmetric key over an insecure channel. Once the key is established, the two parties wishing to communicate can do so with symmetric encryption using the shared key.
+
+
 
 
 **The Tor Design:**
