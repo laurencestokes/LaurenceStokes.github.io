@@ -1,9 +1,9 @@
 /* BLURB */
-    This site was created by Laurence Stokes, with the aid of the tutorial available: http://www.jekyllnow.com/ provided by @baznyc
+This site was created by Laurence Stokes, with the aid of the tutorial available: http://www.jekyllnow.com/ provided by @baznyc
 It's somewhere I can document stuff I learn, and creating it in and of itself was a learning experience. Even this humans.txt is a pretty cool and novel idea
 I was introduced to in developing this site. :)
 
 /* SITE */
-    Language: British English (en-gb)
-    Doctype: HTML5
-    Built With: Notepad++, Chrome DevTools, Git
+Language: British English (en-gb)
+Doctype: HTML5
+Built With: Notepad++, Chrome DevTools, Git
