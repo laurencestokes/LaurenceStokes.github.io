@@ -5,7 +5,7 @@ title: Deobfuscating Javascript Code
 
 In software development, obfuscation is the intentional structuring of code to make it difficult to interpret by humans. Typically, this is done to prevent reverse engineering or to conceal the purpose of the code, which is known as __security through obscurity.__ Many malicious malware binaries obfuscate their code to this end – as do javascript malware exploits, which use javascript and the users browser as their delivery mechanism. Not only does obfuscation render reverse-engineering the malware harder, it also makes it more likely to bypass virus scanners. The virus scanner might be looking for certain signatures (evidence of shellcode payloads, for example) that may go unnoticed if the malware is sufficiently obfuscated.
 
-In this blog post I am going to go through and deobfuscate some javascript code, courtesy of [www.scumware.org](www.scumware.org), a website dedicated to malware analysis and research.
+In this blog post I am going to go through and deobfuscate some javascript code, courtesy of [www.scumware.org](http://www.scumware.org), a website dedicated to malware analysis and research.
 
 Although a contrived example (you would never see a password checker like this in ‘real-life’), the basic principles and step-by-step processes remain the same. In fact, I like the scumware.org series of challenges and feel they present a nice introduction to javascript deobfuscation. Finding a password also provides a nice ‘end goal’ to each challenge!
 
@@ -17,7 +17,7 @@ On loading the webpage, you will be presented with a input form and a password c
 
 On viewing source, we can see some horribly obfuscated Javascript code which is generating and checking the password. Following a few simple steps we can deobfuscate the code, work out what it’s doing, grab the password and complete the challenge!
 
-[![scumwarePart2](../images/scumwarePart2.png)](../images/scumwarePart1.png)
+[![scumwarePart2](../images/scumwarePart2.png)](../images/scumwarePart2.png)
 
 The first step I would advise is beautifying the JavaScript. You can find JavaScript beautifiers online and I used the top result on a Google search for JavaScript beautifier, [http://jsbeautifier.org/.](http://jsbeautifier.org/) The beautified result is below (this time presented in a syntax highlighter code block rather than an image….)
 
@@ -119,7 +119,7 @@ VArray[4] = unescape;
 VArray[5] = String.fromCharCode(2 * VArray[3] - 1); // String.fromCharCode(2 * 19 - 1) = 37 = % symbol
 ```
 
-For the VArray[5] indice, I again used the javasript console in the chrome dev tools to work out what it was. I think the rest of the comments should be self-explanatory, so I won’t go into depth on those. Here’s the dev tools output for String.fromCharCode(37): (We could have also manually looked up the char code on an ascii table such as the one at [http://www.asciitable.com](http://www.asciitable.com/) )
+For the VArray[5] indice, I again used the javasript console in the chrome dev tools to work out what it was. I think the rest of the comments should be self-explanatory, so I won’t go into depth on those. Here’s the dev tools output for String.fromCharCode(37): (We could have also manually looked up the char code on an ascii table such as the one at [http://www.asciitable.com](http://www.asciitable.com/))
 
 ![scumwarePart4](../images/scumwarePart4.png)
 
