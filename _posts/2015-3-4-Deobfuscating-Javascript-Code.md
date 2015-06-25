@@ -17,7 +17,7 @@ On loading the webpage, you will be presented with a input form and a password c
 
 On viewing source, we can see some horribly obfuscated Javascript code which is generating and checking the password. Following a few simple steps we can deobfuscate the code, work out what it’s doing, grab the password and complete the challenge!
 
-![scumwarePart2](../images/scumwarePart2.png)
+[![scumwarePart2](../images/scumwarePart2.png)](../images/scumwarePart1.png)
 
 The first step I would advise is beautifying the JavaScript. You can find JavaScript beautifiers online and I used the top result on a Google search for JavaScript beautifier, [http://jsbeautifier.org/.](http://jsbeautifier.org/) The beautified result is below (this time presented in a syntax highlighter code block rather than an image….)
 
@@ -135,7 +135,7 @@ fog(VArray[4](VArray[7].replace(/H/g, VArray[8])));
 
 The last line is equivalent to eval(unescape(VArray[7].replace(/H/g, ‘%’), having worked backwards from what each of the array indices means – fog is eval, VArray[4] is unescape and VArray[8] is ‘%’. The eval() function in JavaScript means execute JavaScript code/expressions and unescape decodes an encoded string. In this case, it’s going to attempt to decode from Hexadecimal (base 16). The replace(/H/g, VArray[8]) means for each instance of ‘H’ in the VArray[7] string, replace H with VArray[8] (the g means global replace). VArray[8] is equivalent to VArray[5], which we have worked out to be the ‘%’ symbol. If we put this in the chrome dev tools we get:
 
-![scumwarePart5](../images/scumwarePart5.png)
+[![scumwarePart5](../images/scumwarePart5.png)](../images/scumwarePart5.png)
 
 More obfuscated code! Firstly, Let’s replace the VVVVVVVVVVV back into VArray
 
@@ -151,7 +151,7 @@ fig(VArray[4](VArray[6].replace(/O/g, VArray[5])))
 
 Which we now know what to do with (it’s almost identical to the previous example!). Let’s enter this into dev tools and see what we get:
 
-![scumwarePart6](../images/scumwarePart6.png)
+[![scumwarePart6](../images/scumwarePart6.png)](../images/scumwarePart6.png)
 
 Well, this is promising! This is the HTML that generates the form field (remember, paper.write is actually document.write!)
 
