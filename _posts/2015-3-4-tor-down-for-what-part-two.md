@@ -3,15 +3,15 @@ layout: post
 title: TOR DOWN FOR WHAT (PART 2)&#58; USING TOR
 ---
 
-In the [first part](/tor-down-for-what-part-1) of this blog entry I discussed the mechanics of the Onion Routing protocol and how Tor provides anonymity. This section is going to focus on the do’s and dont’s of using Tor and how it’s not always an infallible line of defence against prying eyes.
+In the [first part](/tor-down-for-what-part-one) of this blog entry I discussed the mechanics of the Onion Routing protocol and how Tor provides anonymity. This section is going to focus on the do’s and dont’s of using Tor and how it’s not always an infallible line of defence against prying eyes.
 
 Perhaps the most revealing document about the efficacy of Tor (at least at the time of the document’s publishing, circa 2012) was the Snowdon-leaked NSA presentation entitled ‘Tor Stinks’ (slides available: [http://www.theguardian.com/world/interactive/2013/oct/04/tor-stinks-nsa-presentation-document](http://www.theguardian.com/world/interactive/2013/oct/04/tor-stinks-nsa-presentation-document)). The key points from the slides can be summarised thus:
 
---The Tor protocol is fundamentally effective in achieving anonymity
---De-anonymising some users is possible
---‘Dumb’ users will always be vulnerable (labelled as ‘EPIC FAIL’ by the presentation)
---The NSA and GCHQ operate nodes designed to de-anonymise users
---Traffic analysis attacks are the most effective and tractable tool of de-anonymisation
+-The Tor protocol is fundamentally effective in achieving anonymity
+-De-anonymising some users is possible
+-‘Dumb’ users will always be vulnerable (labelled as ‘EPIC FAIL’ by the presentation)
+-The NSA and GCHQ operate nodes designed to de-anonymise users
+-Traffic analysis attacks are the most effective and tractable tool of de-anonymisation
  
 
 If we are to assume that intelligence agencies such as the NSA and GCHQ are amongst the (if not the) most well resourced and educated attackers, then the Tor Stinks presentation is testament to just how well Tor works. Nonetheless, as the presentation stated: ‘dumb’ users will always be vulnerable. So, what constitutes a dumb user and, if an individual ever wanted to use Tor, how could they avoid being dumb? In answering this, I’m going to digress into the ‘attacks’ against Tor, which I believe are essential in understanding both what makes a user fall into the ‘dumb’ category and more importantly, why.
