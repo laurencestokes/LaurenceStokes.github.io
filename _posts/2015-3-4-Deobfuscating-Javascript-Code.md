@@ -13,6 +13,8 @@ Anyway, with that long preamble aside, let’s jump right into the challenge, wh
 
 On loading the webpage, you will be presented with a input form and a password check. First things first, let’s view source. (right click the page: view page source)!
 
+![scumwarePart1](../images/scumwarePart1.png)
+
 ```javascript
 var paper = document;
 var domain = paper.domain.length;
