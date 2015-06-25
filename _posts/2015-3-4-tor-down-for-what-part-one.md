@@ -1,6 +1,6 @@
 ---
 layout: post
-title: TOR DOWN FOR WHAT (PART 1): HOW TOR WORKS
+title: TOR DOWN FOR WHAT (PART 1)&#58; HOW TOR WORKS
 ---
 
 In this blog post I’m going to dissect Tor (previously an acronym for The Onion Router but now a name in and of itself): how it works and how to use it properly ([part two](/tor-down-for-what-part-2)). So this post doesn’t become an entire book, I’m going to assume a basic understanding of cryptography and a somewhat decent command of maths. Nonetheless, I’ll try to explain all concepts clearly and concisely and, where possible, omit needless complexities.

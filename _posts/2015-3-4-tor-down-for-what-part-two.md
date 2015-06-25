@@ -1,6 +1,6 @@
 ---
 layout: post
-title: TOR DOWN FOR WHAT (PART 2): USING TOR
+title: TOR DOWN FOR WHAT (PART 2)&#58; USING TOR
 ---
 
 In the [first part](/tor-down-for-what-part-1) of this blog entry I discussed the mechanics of the Onion Routing protocol and how Tor provides anonymity. This section is going to focus on the do’s and dont’s of using Tor and how it’s not always an infallible line of defence against prying eyes.
