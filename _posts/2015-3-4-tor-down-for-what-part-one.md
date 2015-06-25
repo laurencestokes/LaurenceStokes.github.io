@@ -22,7 +22,7 @@ Transport Layer Security:* TLS (now superseded by SSL - *Secure Sockets Layer*) 
 
 **The Tor Design:**
 
-*I’ve actually omitted a few details from this explanation for brevity (noticeably, the intricacies of how traffic passes between Tor nodes via ‘cells’ containing specific instructions). These omissions notwithstanding, however, I think the explanation below is well delivered to grasp the strengths of the underlying mechanics of Tor without being boggled down in small minutiae. If anyone is interested in the whole deal, here is a lengthy explanation on Tor from the Tor project itself: [https://svn.torproject.org/svn/projects/design-paper/tor-design.html](https://svn.torproject.org/svn/projects/design-paper/tor-design.html) . What follows is a simply explained, conceptual overview of how Tor iteratively creates a secure circuit for anonymous communication.
+I’ve actually omitted a few details from this explanation for brevity (noticeably, the intricacies of how traffic passes between Tor nodes via ‘cells’ containing specific instructions). These omissions notwithstanding, however, I think the explanation below is well delivered to grasp the strengths of the underlying mechanics of Tor without being boggled down in small minutiae. If anyone is interested in the whole deal, here is a lengthy explanation on Tor from the Tor project itself: [https://svn.torproject.org/svn/projects/design-paper/tor-design.html](https://svn.torproject.org/svn/projects/design-paper/tor-design.html) . What follows is a simply explained, conceptual overview of how Tor iteratively creates a secure circuit for anonymous communication.
 
 I’m going to have to get a bit mathematical hereafter, so bear with me as I’ll try and make everything as easy to understand as possible.
 
