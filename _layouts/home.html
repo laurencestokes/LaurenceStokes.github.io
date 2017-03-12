@@ -101,6 +101,9 @@
                                 case("whoami"):
                                     this.echo("root");
                                     break;
+                                case("cat"):
+                                    this.echo("Usage: cat [options] [filenames] [-] [filenames]");
+                                    break;
                                 case("cat secretfile.txt"):
                                     this.echo("This is a secret file.");
                                     break;
