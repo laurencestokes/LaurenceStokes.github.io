@@ -13,11 +13,11 @@ Anyway, with that long preamble aside, let’s jump right into the challenge, wh
 
 On loading the webpage, you will be presented with a input form and a password check. First things first, let’s view source. (right click the page: view page source)!
 
-![scumwarePart1](../images/scumwarePart1.png)
+![scumwarePart1](../../images/scumwarePart1.png)
 
 On viewing source, we can see some horribly obfuscated Javascript code which is generating and checking the password. Following a few simple steps we can deobfuscate the code, work out what it’s doing, grab the password and complete the challenge!
 
-[![scumwarePart2](../images/scumwarePart2.png)](../images/scumwarePart2.png)
+[![scumwarePart2](../../images/scumwarePart2.png)](../../images/scumwarePart2.png)
 
 The first step I would advise is beautifying the JavaScript. You can find JavaScript beautifiers online and I used the top result on a Google search for JavaScript beautifier, [http://jsbeautifier.org/.](http://jsbeautifier.org/) The beautified result is below (this time presented in a syntax highlighter code block rather than an image….)
 
@@ -98,7 +98,7 @@ fog(VArray[4](VArray[7].replace(/H/g, VArray[8])));
 ```
 This is starting to look more like some readable javascript already! The first variable, var paper = document is making paper equivalent to the HTML DOM document object ([http://www.w3schools.com/jsref/dom_obj_document.asp](http://www.w3schools.com/jsref/dom_obj_document.asp )). The next variable, domain is paper.domain.length. This is therefore equivalent to document.domain.length (as we know paper IS ‘document’). Bringing up chrome dev tools (crtl-shift-i by default) and going to the javascript console we can get the document.domain.length for http://www.scumware.org/skill_up/WarmUp_lvl1.scumware like so: (we could also count the chars in ‘www.scumware.org’….)
 
-![scumwarePart3](../images/scumwarePart3.png)
+![scumwarePart3](../../images/scumwarePart3.png)
 
 The javascript console will come in useful often during this challenge, so it’s good to get working with it now! Carrying on in a similar fashion, we can start to work backwards with the other array indices and variables to work out what they are doing. I’ve labelled a few in the comments in the code below:
 
@@ -121,7 +121,7 @@ VArray[5] = String.fromCharCode(2 * VArray[3] - 1); // String.fromCharCode(2 * 1
 
 For the VArray[5] indice, I again used the javasript console in the chrome dev tools to work out what it was. I think the rest of the comments should be self-explanatory, so I won’t go into depth on those. Here’s the dev tools output for String.fromCharCode(37): (We could have also manually looked up the char code on an ascii table such as the one at [http://www.asciitable.com](http://www.asciitable.com/))
 
-![scumwarePart4](../images/scumwarePart4.png)
+![scumwarePart4](../../images/scumwarePart4.png)
 
 Looking through the rest of the code, the next step I personally took was at the last section.
 
@@ -135,7 +135,7 @@ fog(VArray[4](VArray[7].replace(/H/g, VArray[8])));
 
 The last line is equivalent to eval(unescape(VArray[7].replace(/H/g, ‘%’), having worked backwards from what each of the array indices means – fog is eval, VArray[4] is unescape and VArray[8] is ‘%’. The eval() function in JavaScript means execute JavaScript code/expressions and unescape decodes an encoded string. In this case, it’s going to attempt to decode from Hexadecimal (base 16). The replace(/H/g, VArray[8]) means for each instance of ‘H’ in the VArray[7] string, replace H with VArray[8] (the g means global replace). VArray[8] is equivalent to VArray[5], which we have worked out to be the ‘%’ symbol. If we put this in the chrome dev tools we get:
 
-[![scumwarePart5](../images/scumwarePart5.png)](../images/scumwarePart5.png)
+[![scumwarePart5](../../images/scumwarePart5.png)](../../images/scumwarePart5.png)
 
 More obfuscated code! Firstly, Let’s replace the VVVVVVVVVVV back into VArray
 
@@ -151,7 +151,7 @@ fig(VArray[4](VArray[6].replace(/O/g, VArray[5])))
 
 Which we now know what to do with (it’s almost identical to the previous example!). Let’s enter this into dev tools and see what we get:
 
-[![scumwarePart6](../images/scumwarePart6.png)](../images/scumwarePart6.png)
+[![scumwarePart6](../../images/scumwarePart6.png)](../../images/scumwarePart6.png)
 
 Well, this is promising! This is the HTML that generates the form field (remember, paper.write is actually document.write!)
 
@@ -209,6 +209,6 @@ VArray[30] = VArray[4](VArray[11]);
 
 We know VArray[30] is the password, so that’s simply asking us to unescape(‘Bring_me_lvl2′) – which will return Bring_me_lvl2 which is the password. :D
 
-![scumwarePart7](../images/scumwarePart7.png)
+![scumwarePart7](../../images/scumwarePart7.png)
 
 Now you can try [level 2](http://www.scumware.org/skill_up/Bring_me_lvl2.scumware) on your own!

@@ -34,28 +34,28 @@ The circuit creation process starts by the originator (the user’s Onion Proxy)
 
 The first (entry) node then replies in plaintext with their half of the Diffie-Hellman handshake and a hash of the shared secret to verify that both parties share the same key and it has not been tampered with. Diagrammatically, we can represent the process so far like so:
 
-![Tor1](../images/Tor1.png)
+![Tor1](../../images/Tor1.png)
 
 Where ET1 means public key encryption using the Onion key of Tor Node 1, gx/ gy are the respective halves of the DH handshake and H(gxy) is the hash of the shared secret key.
 
 The originator and Node 1 now have a shared secret key (gxy) with which they can encrypt all subsequent communication. This is an ephemeral (short lived) key known as a ‘session key’ and achieves forward secrecy and key freshness. We know this key is secret between the originator and Node 1 as gx was sent encrypted with Node 1′s Onion key. Now we can continue to build up the layers of the onion and extend the circuit. The originator can now send an extension message to Node 1 requesting to create a further relay to Node 2. To this end, the originator sends to Node 1 an instruction to talk to Node 2 along with a new half of the DH handshake (as the originator must create another session key – this time with Node 2) encrypted with Node 2′s Onion key (again, looked up from a directory). This entire message is encrypted with the session key of Node 1. It’s easier to see in a diagram, so without further ado:
 
-![Tor2](../images/Tor2.png)
+![Tor2](../../images/Tor2.png)
 
 Where T2 is the instruction to talk to Node 2, ET2 is the Onion key of Node 2 and gz is the originators half of the DH handshake to establish the session key with Node 2.
 
 From here, all the first node can do is forward that message to the second node. They can’t tamper with it (as it’s encrypted with the second nodes Onion key). It’s also important to note that at this stage, the second node can’t tell whether the first node is or isn’t the originator and equally the first node doesn’t even know if the originator is the originator or just another node in the circuit. Just like before (with the first node and the originator), the second node replies to the first node with its half of the DH handshake and a hash of the secret key. Node 1 then encrypts this with the session key it has with the originator and forwards it to them. The originator can guarantee everything is ok by calculating and checking the hash against what it receives from Node 2 – if it doesn’t compute then something’s not right! Let’s build the diagram up further:
 
-![Tor3](../images/Tor3.png)
+![Tor3](../../images/Tor3.png)
 
 Now the originator has two session keys, gxy and gzw – he or she is thus able to apply two layers of encryption one on top of the other – hence the name Onion Routing!  This process could in theory be repeated ad infinitum and more and more nodes added to the circuit. However, for brevity, let’s assume that we’re happy with a circuit of size two. We’re now ready to send data over the interwebs anonymously! Say we wanted to open a website (via a HTTP GET request). We’d encrypt the message first with the session key between (originator + Node 2) and then encrypt that entire thing with the session key between (originator + Node 1).
 
 When this is sent, the first node will be able to decrypt the message, but only to the point of stripping one layer of encryption. He won’t be able to actually read the HTTP GET request – as that’s encrypted with the session key for Node 2! So all Node 1 can do at this stage is forward the encrypted message to Node 2. Node 2 then decrypts the message, sees the HTTP get request and sends that off to the ip of whatever domain was specified. The originator has no confidentiality at this stage – Node 2 can read the get request (hell, Node 2 could even modify it if it had the proclivity) but Node 2 has no idea who sent the message (to Node 2, the message simply came from Node 1). Thus, anonymity is still ensured. Again, building up the diagram, this is where we’ve got to:
 
-![Tor4](../images/Tor4.png)
+![Tor4](../../images/Tor4.png)
 
 So, how does the originator get back their message (the reply to the HTTP GET request in this case?). The server replies (to the exit node (Node 2), whom the server believes made the request) with the response. Node 2 then applies its session key to the response and sends that to Node 1 (we’re building the layers of the encryption back up!). Again, Node 1 can’t read the reply. Node 1 then adds its session key to the response (so it’s now doubly encrypted again) and returns it back to the originator, who can strip both session keys and view the reply. Viola! So, the diagram of the complete process:
 
-![Tor](../images/Tor.png)
+![Tor](../../images/Tor.png)
 
 So there we have the underlying mechanics of Onion Routing, on which Tor is founded. Hopefully this has led to a good understanding (from a conceptual point of view) of how it works to provide anonymity over a network (read: the internet). Now we’ve got the overview down, we can start to look at some ways that individuals can still be de-anonymized whilst using Tor and how one can prevent against that. That’s all in [part two](/tor-down-for-what-part-two).
