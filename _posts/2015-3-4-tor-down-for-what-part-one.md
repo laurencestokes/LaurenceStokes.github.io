@@ -3,7 +3,7 @@ layout: post
 title: TOR DOWN FOR WHAT (PART 1)&#58; HOW TOR WORKS
 ---
 
-In this blog post I’m going to dissect Tor (previously an acronym for The Onion Router but now a name in and of itself): how it works and how to use it properly ([part two](/tor-down-for-what-part-two)). So this post doesn’t become an entire book, I’m going to assume a basic understanding of cryptography and a somewhat decent command of maths. Nonetheless, I’ll try to explain all concepts clearly and concisely and, where possible, omit needless complexities.
+In this blog post I’m going to dissect Tor (previously an acronym for The Onion Router but now a name in and of itself): how it works and how to use it properly ([part two](/blog/tor-down-for-what-part-two)). So this post doesn’t become an entire book, I’m going to assume a basic understanding of cryptography and a somewhat decent command of maths. Nonetheless, I’ll try to explain all concepts clearly and concisely and, where possible, omit needless complexities.
 
 **So, what is Tor?** Well, put simply it’s the name of a network service that is based on the principles of Onion Routing, a technique for anonymous communication developed by the US Navy. It’s also free and pretty much the de facto standard online anonymity tool. It provides anonymity (not confidentiality) online, which to put it in layman’s terms: people can see what you write, but won’t know it was you who wrote it. It’s not foolproof (I’ll address the shortcomings in detail in part two), however it does provide a damn good curtain against all but the most persistent and well equipped interlopers, and, if used extremely pedantically, could even thwart them.
 
@@ -58,4 +58,4 @@ So, how does the originator get back their message (the reply to the HTTP GET re
 
 ![Tor](../../images/Tor.png)
 
-So there we have the underlying mechanics of Onion Routing, on which Tor is founded. Hopefully this has led to a good understanding (from a conceptual point of view) of how it works to provide anonymity over a network (read: the internet). Now we’ve got the overview down, we can start to look at some ways that individuals can still be de-anonymized whilst using Tor and how one can prevent against that. That’s all in [part two](/tor-down-for-what-part-two).
+So there we have the underlying mechanics of Onion Routing, on which Tor is founded. Hopefully this has led to a good understanding (from a conceptual point of view) of how it works to provide anonymity over a network (read: the internet). Now we’ve got the overview down, we can start to look at some ways that individuals can still be de-anonymized whilst using Tor and how one can prevent against that. That’s all in [part two](/blog/tor-down-for-what-part-two).
