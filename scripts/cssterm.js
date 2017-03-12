@@ -5,7 +5,7 @@ $(document).ready(function() {
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g, '&nbsp');
     }
     function userReplace(str) {
-      return str.replace(/^#/gi, '<root>[root@localhost]# </root>').replace(/^\$/gi, '<user>[user@localhost]$ </user>');
+      return str.replace(/^#/gi, '<root>[root@localhost]# </root>').replace(/^\$/gi, '<user>[loz@localhost]$ </user>');
     }
 
   // the html that will be inserted to replace the shortened code
@@ -22,7 +22,7 @@ $(document).ready(function() {
 				</div> \
 			</div> \
 			<div id="terminal-title"> \
-				user@localhost:~ \
+				loz@localhost:~ \
 			</div> \
 		</div> \
 	</div> \
