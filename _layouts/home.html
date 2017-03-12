@@ -61,7 +61,6 @@
             if (xhr.readyState == 4 && xhr.status == 200)
             {
                 var response = JSON.parse(xhr.responseText);
-                console.log(response);
                 userip = response.ip;
                 userCity = response.city;
                 userCountry = response.country;
@@ -70,25 +69,23 @@
                 [
                     "<span style='color: #e5e500; font-weight:bold'>Target identified</span>: ^1000 (<span style='color: #ff0000; font-weight:bold'>"+userip+"</span>) of <span style='color: #ff0000; font-weight:bold'>"+userCity+", "+userCountry+".</span><br><br>"+
                     "msf exploit(<span style='color: #ff0000;'>web_delivery</span>)<span style='color: #13c16a;'> > exploit</span><br><br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Handler binding to LHOST 192.168.0.1:89<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Started reverse handler<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Triggering the vulnerability...<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Transmitting intermediate stager for over-sized stage...(191 bytes)<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Sending stage (2650 bytes)<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Sleeping before handling stage...<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Uploading DLL (75787 bytes)...<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Upload completed.<br>"+
-                    "<span style='color: #0000ff;'>[*]</span> Meterpreter session 1 opened (192.168.0.1:89 -&gt; "+userip+")<br><br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Handler binding to LHOST 192.168.0.1:89<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Started reverse handler<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Triggering the vulnerability...<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Transmitting intermediate stager for over-sized stage...(191 bytes)<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Sending stage (2650 bytes)<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Sleeping before handling stage...<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Uploading DLL (75787 bytes)...<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Upload completed.<br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Meterpreter session 1 opened (192.168.0.1:89 -&gt; "+userip+")<br><br>"+
                     "<br>msf exploit(<span style='color: #ff0000;'>web_delivery</span>) > <span style='color: #13c16a;'>sessions -i 1</span></br></br>"+
-                    "<span style='color: #333399;'>[*]</span> Starting interaction with 1...<br><br>"+
+                    "<span style='color: #00eeff;'>[*]</span> Starting interaction with 1...<br><br>"+
                     "<div id='meterpreter' style='overflow:hidden'></div>"
                 ];
 
                 Typed.new(".typed", {
                     strings: string,
                     typeSpeed: 4,
-                    // backspacing speed
-                    backSpeed: 5,
                     showCursor: false,
                     callback: function(){
                         setTimeout(function(){}, 1000);
