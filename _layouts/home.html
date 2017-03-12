@@ -91,6 +91,7 @@
                     backSpeed: 5,
                     showCursor: false,
                     callback: function(){
+                        setTimeout(function(){}, 1000);
                         jQuery(function($, undefined) {
                             $('#meterpreter').terminal(function(command){
                                 switch(command) {
@@ -98,16 +99,18 @@
                                     this.echo("");
                                     break;
                                 case("ls"):
-                                    this.echo("secretfile.txt")
+                                    this.echo("secretfile.txt secretfile2.txt")
                                     break;
                                 case("whoami"):
                                     this.echo("root");
                                     break;
                                 case("cat secretfile.txt"):
-                                    this.echo("huehuehuehue");
+                                    this.echo("This is a secret file.");
+                                    break;
+                                case("cat secretfile2.txt"):
+                                    this.echo("This is another secret file.");
                                     break;
                                 default:
-                                    this.echo("command "+typeof(command));
                                     this.echo("bash: "+command+" : command not found");
                                     break;
                                 }
