@@ -37,7 +37,23 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
 
-  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  <script>
+        var userip;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', "http://ipinfo.io/json", true);
+        xhr.send();
+         
+        xhr.onreadystatechange = processRequest;
+
+        function processRequest(e) 
+        {
+            if (xhr.readyState == 4 && xhr.status == 200)
+            {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+            }
+        }
+  </script>
   </head>
 
   <body>
@@ -53,7 +69,8 @@
           </div>
 
           <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
+            <a href="{{ site.baseurl }}/">Home</a>
+            <a href="{{ site.baseurl }}/blog">Blog</a>
             <a href="{{ site.baseurl }}/about">About</a>
           </nav>
         </header>
