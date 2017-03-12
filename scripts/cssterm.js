@@ -1,5 +1,31 @@
 $(document).ready(function() {
 
+
+    var tagsToReplace = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      ' ': '&nbsp;',
+      '#': '<root>[root@localhost]# </root>',
+      '$': '<user>[user@localhost]$ </user>'
+    };
+    function replaceTag(tag) {
+      return tagsToReplace[tag] || tag;
+    }
+    function htmlEscape(str) {
+      return str.replace(/[&<> ]/g, replaceTag);
+    }
+    function userReplace(str) {
+      return str.replace(/^[#$]/gi, replaceTag);
+    }
+  } else {
+    function htmlEscape(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g, '&nbsp');
+    }
+    function userReplace(str) {
+      return str.replace(/^#/gi, '<root>[root@localhost]# </root>').replace(/^\$/gi, '<user>[user@localhost]$ </user>');
+    }
+
   // the html that will be inserted to replace the shortened code
   // the terminal bar and body before the text is placed
 	var termTop = '\
