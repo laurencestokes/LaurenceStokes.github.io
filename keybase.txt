@@ -1,0 +1,78 @@
+==================================================================
+https://keybase.io/liggles
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.lozstokes.co.uk
+  * I am liggles (https://keybase.io/liggles) on keybase.
+  * I have a public key with fingerprint 276C F27F B218 3804 7D28  9551 1048 364
+3 71BD E1E6
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.7.3"
+        },
+        "key": {
+            "fingerprint": "276cf27fb21838047d2895511048364371bde1e6",
+            "host": "keybase.io",
+            "key_id": "1048364371BDE1E6",
+            "uid": "44ee9b2b0cfdaab6c3e8e63cec393300",
+            "username": "liggles"
+        },
+        "merkle_root": {
+            "ctime": 1421793430,
+            "hash": "5e1fa3b886120ed5ebb15a019a59898dc5fabb3cdf4b47b72a4488ab2da
+015e696fd844ae2a7a0eb313bbe78a08f8a9ac10d9f095d62ac622082082293d3262c",
+            "seqno": 136443
+        },
+        "service": {
+            "hostname": "www.lozstokes.co.uk",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1421793453,
+    "expire_in": 157680000,
+    "prev": "7cf2f8250e8da27d9232e8dbdaca4916a5688930d28d80bc1814e0c706fffa62",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v2.0.22 (MingW32)
+
+owFdkl1oHFUUxzdbW6u0NiBqKra206VYjcude+/M3FmoDzXRoNgWrA3tg+v9OLM7
+2e3MZmaSNV0iNgGhT1ZFwYdVIm0FicYS+thvBaEo2KLYLi22YMSCFZIKMdCtd0Kk
+6jAP9878zv+c/znn0OplmWxHZ5/97OCJazMd538TmV0nf/qyYYhQjRiFhiGrPgRJ
+egr4PjAKRgVGBI8h74cbglBBfiDesMR0G8MQxX4YaArlnTwxRrtTPA32/KAEUS3y
+Uy0DO7b0sOMJbDLCEHUUZq5lmSaijNiUOKZQYIKtJcthnPwnq7GoWfSV/nqX39bT
+a/am/NDiD0oBXIEFkp7iXNiSAAObSJDEJQShFIwhWrJU9UulKsRpufsgqlShGIXh
+omeZ+ClhUmw6LqEE6YJ4XNYxFpgeJ4Ix28QIlAVCmBZHpsstl7lMScvjQhCpPCqo
+IxzMKWWMC6w0ZIHt2p5ilHLA3OEIBDGJEOAwjpjHuMuliZTrIddSNubSxhix9MUu
+UQTbWGoHMQwGoS5Od4CS0fQeDfsS0rrTri2Zq9fr+Wq4P07CCsR5GeaHKjq2FoVJ
+KMOqBspJUiuk3pORGhjTOgJEcUmrKPxA6dH9e7amRv/XF4t0G/B6zY+g6KeE5dgM
+6SfNA8M6h6PH7TFsIWCKY0e5mGB9FIpLTl3T5pbNmEuQ3gPFkJAmMykg6SDb8zxu
+47tudaaEl7Rk7JcCngxFYIwe7HjsnkxHNrNieTZd3sz993X+s9EvTt7bdn/8/nER
+zBc+aU9EU+0LKxvjJ2fO7fi89eeR82+ue/no6vxwa4p+/dzu3yceUmvPOcaq9Z0D
+13eK6lOzO2dfuXF7zar5JmzqeXXNxj0/b72ZnX/44tvjl243Pn6669YvvZs+mvvu
+eFf/cbo990LukeyxQrlT1XML8dhCa2wieHf9VzNbv3jp+bn+i2sbqP7r3uUrdkwc
+aj85S4PDKw9kDn7w1um9+1+70ffthXVvHJiqbJxcNn2mX/DS1PZmc3LbqWPXrffH
++y7fybz3R/Pm1SstMZLrabfGcw8MHP6seQ11vfPgN6f3zPlPBH+NfTo4vZC70zpV
++uHWo/Ut5XAzN3JHxj58ZtfZo/hv
+=dAlN
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/liggles
+
+==================================================================
