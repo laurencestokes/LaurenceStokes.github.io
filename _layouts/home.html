@@ -81,7 +81,7 @@
                     "<span style='color: #0000ff;'>[*]</span> Meterpreter session 1 opened (192.168.0.1:89 -&gt; "+userip+")<br><br>"+
                     "<br>msf exploit(<span style='color: #ff0000;'>web_delivery</span>) > <span style='color: #13c16a;'>sessions -i 1</span></br></br>"+
                     "<span style='color: #333399;'>[*]</span> Starting interaction with 1...<br><br>"+
-                    "<div id='term-demo' class='terminal' style='min-height: 200px'></div>"
+                    "<div id='meterpreter'></div>"
                 ];
 
                 Typed.new(".typed", {
@@ -91,7 +91,7 @@
                     backSpeed: 5,
                     callback: function(){
                         jQuery(function($, undefined) {
-                            $('#term_demo').terminal(function(command) {
+                            $('#meterpreter').terminal(function(command) {
                                 if (command !== '') {
                                     try {
                                         var result = window.eval(command);
