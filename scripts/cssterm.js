@@ -26,12 +26,12 @@ $(document).ready(function() {
 			</div> \
 		</div> \
 	</div> \
-	<div id="terminal-body"><p> \
+	<div id="terminal-body"><p><span class="typed"></spanm \
 ';
 
 	// closes the html that has been inserted, ends the terminal display
 	var termBot = '\
-	</p><span class="typed"></span> \
+	</p> \
 	</div> \
 </div> \
 ';
