@@ -104,6 +104,11 @@
   line-height: 1.5em;
 }
 
+.typed {
+  font-family: monospace; line-height: 1em;
+  color: gray!important;
+}
+
 #terminal-body p { color: gray!important; }
 
 #terminal-body p::-moz-selection { background: #0b209e; }
