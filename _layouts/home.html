@@ -38,9 +38,11 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/cssterm.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/jquery.terminal-1.0.12.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/scripts/cssterm.js"></script>
     <script src="/scripts/typed.min.js"></script>
+    <script src="/scripts/jquery.terminal-1.0.12.min.js"></script>
     
     
     <script>
@@ -79,7 +81,7 @@
                     "<span style='color: #0000ff;'>[*]</span> Meterpreter session 1 opened (192.168.0.1:89 -&gt; "+userip+")<br><br>"+
                     "<br>msf exploit(<span style=color: #ff0000;'>web_delivery</span>) > <span style='color: #13c16a;'>sessions -i 1</span></br></br>"+
                     "<span style='color: #333399;'>[*]</span> Starting interaction with 1...<br><br>"+
-                    "<u>meterpreter</u> >"
+                    "<div id='#term-demo'></div>"
                 ];
 
                 Typed.new(".typed", {
@@ -87,6 +89,28 @@
                     typeSpeed: 3,
                     // backspacing speed
                     backSpeed: 5,
+                    onStringTyped: function(){
+                    jQuery(function($, undefined) {
+                        $('#term_demo').terminal(function(command) {
+                            if (command !== '') {
+                                try {
+                                    var result = window.eval(command);
+                                    if (result !== undefined) {
+                                        this.echo(new String(result));
+                                    }
+                                } catch(e) {
+                                    this.error(new String(e));
+                                }
+                            } else {
+                               this.echo('');
+                            }
+                        }, {
+                            name: 'js_demo',
+                            height: 200,
+                            prompt: 'meterpreter> '
+                        });
+                    });
+                    },
                 });
             }
         }
