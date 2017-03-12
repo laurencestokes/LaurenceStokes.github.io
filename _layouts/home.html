@@ -92,8 +92,7 @@
                     callback: function(){
                         jQuery(function($, undefined) {
                             $('#meterpreter').terminal(function(command){
-                                console.log(command);
-                                switch(command) {
+                                switch(command.toString()) {
                                 case(""):
                                     this.echo("");
                                     break;
