@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-
+  // Better performance in replacing js in any browsers. http://jsperf.com/encode-html-entities
+  if(!$.browser.chrome) {
     var tagsToReplace = {
       '&': '&amp;',
       '<': '&lt;',
@@ -25,6 +26,7 @@ $(document).ready(function() {
     function userReplace(str) {
       return str.replace(/^#/gi, '<root>[root@localhost]# </root>').replace(/^\$/gi, '<user>[user@localhost]$ </user>');
     }
+  }
 
   // the html that will be inserted to replace the shortened code
   // the terminal bar and body before the text is placed
