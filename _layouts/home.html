@@ -91,8 +91,9 @@
                     backSpeed: 5,
                     callback: function(){
                         jQuery(function($, undefined) {
-                            $('#meterpreter').terminal(function(command) {
-                                switch(command !== '') {
+                            $('#meterpreter').terminal(function(command){
+                                console.log(command);
+                                switch(command) {
                                 case(""):
                                     this.echo("");
                                     break;
