@@ -98,12 +98,11 @@
   font-size: 11px;
   float: left;
   width: 100%;
-  min-height: 30px;
+  min-height: 500px;
   background-color: #000;
   padding: 10px;
   line-height: 1.5em;
 }
-
 
 #terminal-body p { color: gray!important; }
 
@@ -133,4 +132,27 @@
 @-moz-keyframes blink {
   0%   { background:rgba(99,222,0,100); }
   100% { background:rgba(99,222,0,0); }
+}
+
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }

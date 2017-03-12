@@ -31,7 +31,7 @@ $(document).ready(function() {
 
 	// closes the html that has been inserted, ends the terminal display
 	var termBot = '\
-	</p><span class="element"></span> \
+	</p> \
 	</div> \
 </div> \
 ';
