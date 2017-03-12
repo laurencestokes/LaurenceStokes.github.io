@@ -26,7 +26,7 @@ $(document).ready(function() {
 			</div> \
 		</div> \
 	</div> \
-	<div id="terminal-body"><p><span class="typed"></spanm \
+	<div id="terminal-body"><p><span class="typed"></span> \
 ';
 
 	// closes the html that has been inserted, ends the terminal display
