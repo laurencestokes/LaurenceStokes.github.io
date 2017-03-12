@@ -40,9 +40,9 @@ disqus: lozstokes
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics:
 
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
+# Your website URL 
 # Used for Sitemap.xml and your RSS feed
-url:
+url: www.lozstokes.co.uk
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
@@ -68,7 +68,6 @@ sass:
 # Use the following plug-ins
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-last-modified-at
 
 # Exclude these files from your production _site
 exclude:
