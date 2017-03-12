@@ -92,18 +92,21 @@
                     callback: function(){
                         jQuery(function($, undefined) {
                             $('#meterpreter').terminal(function(command) {
-                                if (command !== '') {
-                                    try {
-                                        var result = window.eval(command);
-                                        if (result !== undefined) {
-                                            this.echo(new String(result));
-                                        }
-                                    } catch(e) {
-                                        this.error(new String(e));
-                                    }
-                                } else {
-                                   this.echo('');
-                                }
+                                switch(command !== '') {
+                                case(""):
+                                    this.echo("");
+                                    break;
+                                case("ls"):
+                                    this.echo("secretfile.txt")
+                                    break;
+                                case("whoami"):
+                                    this.echo("root");
+                                    break;
+                                case("cat secretfile.txt"):
+                                    this.echo("huehuehuehue");
+                                    break;
+                                default:
+                                    break;
                             }, {
                                 greetings: "",
                                 name: 'js_demo',
