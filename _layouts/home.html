@@ -239,13 +239,14 @@
 			
 			var string = 
 			[
+				"<br>"+
 				"<span style='color: #e5e500; font-weight:bold'>Target identified...</span><br><br> ^1000"+
-				"IPv4 Address: <span style='color: #eeeeee;'>"+userip+"</span><br>"+
-				"Location: <span style='color: #eeeeee;'>"+ (userCity ? userCity+", "+(userRegion ? userRegion+", "+userCountry : userCountry) : (userRegion ? userRegion+", "+userCountry : userCountry))+"</span><br>"+
-				"Device: <span style='color: #eeeeee;'>"+(jscd.mobile ? "Mobile Phone" : "Computer/Laptop")+"</span><br>"+
-				"Operating System: <span style='color: #eeeeee;'>"+jscd.os +" "+ jscd.osVersion+"</span><br>"+
-				"Browser: <span style='color: #eeeeee;'>"+jscd.browser +" "+ jscd.browserMajorVersion+"</span><br>"+
-				"Screen Size: <span style='color: #eeeeee;'>"+jscd.screen+"</span><br><br>"+
+				"IPv4 Address: 		<span style='color: #eeeeee;'>"+userip+"</span><br>"+
+				"Location:     		<span style='color: #eeeeee;'>"+ (userCity ? userCity+", "+(userRegion ? userRegion+", "+userCountry : userCountry) : (userRegion ? userRegion+", "+userCountry : userCountry))+"</span><br>"+
+				"Device:        	<span style='color: #eeeeee;'>"+(jscd.mobile ? "Mobile Phone" : "Computer/Laptop")+"</span><br>"+
+				"Operating System: 	<span style='color: #eeeeee;'>"+jscd.os +" "+ jscd.osVersion+"</span><br>"+
+				"Browser: 			<span style='color: #eeeeee;'>"+jscd.browser +" "+ jscd.browserMajorVersion+"</span><br>"+
+				"Screen Size: 		<span style='color: #eeeeee;'>"+jscd.screen+"</span><br><br>"+
 				
 				"msf exploit(<span style='color: #ff0000;'>web_delivery</span>)<span style='color: #13c16a;'> > exploit</span><br><br>"+
 				"<span style='color: #00eeff;'>[*]</span> Handler binding to LHOST 192.168.0.1:89<br>"+
