@@ -130,6 +130,7 @@
     {
         if (e.detail.open) 
         {
+            counter++;
             $(".overlay").css(
             {
                 display: "inline",
@@ -142,18 +143,16 @@
                 left:"0px",
                 "z-index":"1000"
             })
-                if(counter > 3)
-                {
-                    if (msie)
-                    {
-                        solecon.go("%c" +  "You have opened the console: "+counter+" times. This has been logged.", "background: black; color: #00ff00; font-size: x-large;");
-                    }
-                    else
-                    {
-                        solecon.go("%c" +  "You have opened the console: "+counter+" times. This has been logged.", "background: black; color: #00ff00; font-size: x-large;")
-                    }
-                    
-                }
+
+            if (msie)
+            {
+                solecon.go("%c" +  "You have opened the console: "+counter+" times. This has been logged.", "background: black; color: #00ff00; font-size: x-large;");
+            }
+            else
+            {
+                solecon.go("%c" +  "You have opened the console: "+counter+" times. This has been logged.", "background: black; color: #00ff00; font-size: x-large;")
+            }
+
         } 
         else 
         {
