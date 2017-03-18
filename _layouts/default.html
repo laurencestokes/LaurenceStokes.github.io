@@ -303,13 +303,21 @@
 								case("cat secretfile2.txt"):
 									this.echo("This is another secret file.");
 									break;
+                                case("echo"):
+									this.echo(command);
+									break;
 								default:
 									this.echo("bash: "+command+" : command not found");
 									break;
 							}
 						}, 
 						{
-							greetings: "",
+							greetings: "GNU bash, version 4.3.42(5)-release (x86_64)"+
+                            "\n Available Commands:"+
+                            "\n ls [options]+
+                            "\n cat[options] [filenames] [-] [filenames]"
+                            "\n whoami"
+                            "\n echo [string]"
 							name: 'js_demo',
 							height: 200,
 							prompt: 'meterpreter> '
