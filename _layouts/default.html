@@ -313,8 +313,8 @@
 								case("cat secretfile2.txt"):
 									this.echo("This is another secret file.");
 									break;
-                                case(command.toString().substring(0,5).match(/^echo /)):
-									this.echo(command.toString().substring(5));
+                                case(command.substring(0,5).match(/^echo /)):
+									this.echo(command.substring(5));
 									break;
 								default:
 									this.echo("bash: "+command+" : command not found");
