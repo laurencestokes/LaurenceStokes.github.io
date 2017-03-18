@@ -248,7 +248,7 @@
 			var string = 
 			[
 				"<br>"+
-				"<span style='color: #e5e500; font-weight:bold'>Target identified...</span><br><br> ^1000"+
+				"<span style='color: #e5e500; font-weight:bold'>Target identified...</span><br><br> ^100"+
 				"IPv4 Address: <span style='color: #eeeeee;'>"+userip+"</span><br>"+
 				"Location: <span style='color: #eeeeee;'>"+ (userCity ? userCity+", "+(userRegion ? userRegion+", "+userCountry : userCountry) : (userRegion ? userRegion+", "+userCountry : userCountry))+"</span><br>"+
 				"Device: <span style='color: #eeeeee;'>"+(jscd.mobile ? "Mobile Phone" : "Computer/Laptop")+"</span><br>"+
@@ -313,7 +313,10 @@
 								case("cat secretfile2.txt"):
 									this.echo("This is another secret file.");
 									break;
-                                case(command.substring(0,5).match(/^echo /)):
+                                case("echo"):
+									this.echo("Usage: echo [string]");
+									break;
+                                case (command.match(/^echo\s.{0,5}/)|| {}).input:
 									this.echo(command.substring(5));
 									break;
 								default:
