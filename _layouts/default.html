@@ -292,12 +292,14 @@
 									this.echo("secretfile.txt secretfile2.txt")
 									break;
                                 case("help"):
-									this.echo("\nAvailable Commands:"+                            
+									this.echo("\n"+
+                                            "Available Commands:"+                            
                                             "\nls [options]"+
                                             "\ncat[filename]"+
                                             "\nwhoami"+
                                             "\nhelp"+
-                                            "\necho [string]");
+                                            "\necho [string]"+
+                                            "\n");
 									break;
 								case("whoami"):
 									this.echo("root");
@@ -311,8 +313,8 @@
 								case("cat secretfile2.txt"):
 									this.echo("This is another secret file.");
 									break;
-                                case(command.substring(0,5).match(/^echo /)):
-									this.echo(command.substring(5));
+                                case(command.toString().substring(0,5).match(/^echo /)):
+									this.echo(command.toString().substring(5));
 									break;
 								default:
 									this.echo("bash: "+command+" : command not found");
