@@ -291,6 +291,14 @@
 								case("ls"):
 									this.echo("secretfile.txt secretfile2.txt")
 									break;
+                                case("help"):
+									this.echo("\nAvailable Commands:"+                            
+                                            "\nls [options]"+
+                                            "\ncat[filename]"+
+                                            "\nwhoami"+
+                                            "\nhelp",
+                                            "\necho [string]");
+									break;
 								case("whoami"):
 									this.echo("root");
 									break;
@@ -303,8 +311,8 @@
 								case("cat secretfile2.txt"):
 									this.echo("This is another secret file.");
 									break;
-                                case("echo"):
-									this.echo(command);
+                                case(command.substring(0,5).match(/^echo /)):
+									this.echo(command.substring(5));
 									break;
 								default:
 									this.echo("bash: "+command+" : command not found");
@@ -312,12 +320,7 @@
 							}
 						}, 
 						{
-							greetings: "GNU bash, version 4.3.42(5)-release (x86_64)"+
-                            "\n Available Commands:"+
-                            "\n ls [options]"+
-                            "\n cat[options] [filenames] [-] [filenames]"+
-                            "\n whoami"+
-                            "\n echo [string]",
+							greetings: "GNU bash, version 4.3.42(5)-release (x86_64). Type 'help' to see available commands."
 							name: 'js_demo',
 							height: 200,
 							prompt: 'meterpreter> '
