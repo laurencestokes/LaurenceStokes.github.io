@@ -15,6 +15,11 @@ avatar: https://avatars3.githubusercontent.com/u/6308252?v=3&s=460
 # Flags below are optional
 #
 
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:

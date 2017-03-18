@@ -27,11 +27,9 @@
 				-->
 
     {% include meta.html %}
-
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
     {% if page.title != "Loz Stokes - Home"%}
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     
@@ -41,8 +39,7 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    {% else %}
-    
+    {% else %}  
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
 	<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/cssterm.css">
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/jquery.terminal-1.0.12.css">
@@ -341,6 +338,7 @@
           <nav>
             <a href="{{ site.baseurl }}/">Home</a>
             <a href="{{ site.baseurl }}/blog">Blog</a>
+            <a href="{{ site.baseurl }}/projects">Projects</a>
             <a href="{{ site.baseurl }}/about">About</a>
           </nav>
         </header>
