@@ -8,6 +8,7 @@
       </div>
     </div>
     <div class="overlay"></div>
+    <div class="consolePopup" style="display:none">Close the console to remove the overlay!</div>
     <script src="/scripts/baffle.min.js"></script>
     <script>
     var siteDesc = baffle('.site-description').start();
@@ -141,20 +142,33 @@
                 height:"100%",
                 top:"0px",
                 left:"0px",
-                "z-index":"1000"
-            })
+                z-index:"1000"
+            });
+            
+            $(".consolePopup").css(
+                display: "inline",
+                position: "fixed";
+                top: "20%";
+                background: "#333";
+                padding: "20px";
+                border: "1px solid #999";
+                width: "300px;"
+                left: "50%;"
+                margin-left: "-150px;"
+                text-align: "center";
+            });
             
             solecon.clear();
             
             if (msie)
             {
                 solecon.go("%c" +  "You have opened the console: "+counter+" times. This has been logged.", "background: black; color: #00ff00; font-size: x-large;");
-                solecon.go("%c" +  "Flag 3: 'have'.", "color: #ffffff; font-size: x-large;");
+                solecon.go("%c" +  "Flag 2: 'have'.", "color: #ffffff; font-size: x-large;");
             }
             else
             {
                 solecon.go("%c" +  "You have opened the console: "+counter+" times. This has been logged.", "background: black; color: #00ff00; font-size: x-large;");
-                solecon.go("%c" +  "Flag 3: 'have'.", "color: #ffffff; font-size: x-large;");
+                solecon.go("%c" +  "Flag 2: 'have'.", "color: #ffffff; font-size: x-large;");
             }
 
         } 
@@ -163,14 +177,11 @@
             $(".overlay").css(
             {
                 display: "none",
-                opacity:"0.8",
-                background: "grey",
-                position:"fixed",
-                width:"100%",
-                height:"100%",
-                top:"0px",
-                left:"0px",
-                "z-index":"1000"
+            });
+            
+             $(".consolePopup").css(
+            {
+                display: "none",
             });
         }
     })
