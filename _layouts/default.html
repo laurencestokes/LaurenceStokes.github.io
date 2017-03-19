@@ -24,6 +24,7 @@
 				░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░
 				░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░
 				░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░
+                Flag 1: "You".
 				-->
 
     {% include meta.html %}
@@ -289,13 +290,23 @@
 									this.echo("");
 									break;
 								case("ls"):
-									this.echo("secretfile.txt secretfile2.txt")
+									this.echo("file.txt")
 									break;
+                                case("ls -l"):
+                                    this.echo("-rw-r--r-- 1 root 197609  87 Mar 19 2017 20:54 file.txt");
+                                    break;
+                                case("ls -a"):
+                                    this.echo("file.txt .secretfile.txt");
+                                    break;
+                                case("ls -la"):
+                                    this.echo("-rw-r--r-- 1 root 197609  87 Mar 19 2017 20:54 file.txt");
+                                    this.echo("-rw-r--r-- 1 root 197609  15 Mar 19 2017 20:58 secretfile.txt");
+                                    break;
                                 case("help"):
 									this.echo("\n"+
                                             "Available Commands:"+                            
                                             "\nls [options]"+
-                                            "\ncat[filename]"+
+                                            "\ncat [filename]"+
                                             "\nwhoami"+
                                             "\nhelp"+
                                             "\necho [string]"+
@@ -305,13 +316,13 @@
 									this.echo("root");
 									break;
 								case("cat"):
-									this.echo("Usage: cat [options] [filenames] [-] [filenames]");
+									this.echo("Usage: cat [filename]");
+									break;
+								case("cat file.txt"):
+									this.echo("Flag 3: 'got'. There is another flag here! Perhaps you should try and list all files...");
 									break;
 								case("cat secretfile.txt"):
-									this.echo("This is a secret file.");
-									break;
-								case("cat secretfile2.txt"):
-									this.echo("This is another secret file.");
+									this.echo("Flag 4: 'them'.");
 									break;
                                 case("echo"):
 									this.echo("Usage: echo [string]");
