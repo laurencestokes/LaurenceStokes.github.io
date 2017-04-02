@@ -7,8 +7,10 @@ permalink: /topics/
 <div class="posts">
   {% for topic in site.topics %}
     <article class="post">
-
-      <h1 class="post-title"><a href="{{ site.baseurl }}{{ topic.url }}">{{ topic.title }}</a> : </h1>
+      {% for tag in site.tags %}
+        {% if tag == topic %}
+          {% assign count = site.tags[tag].size %}
+      <h1 class="post-title"><a href="{{ site.baseurl }}{{ topic.url }}">{{ topic.title }}</a>: {{count}}</h1>
 
       <div class="entry">
         {{ topic.excerpt }}
@@ -16,5 +18,7 @@ permalink: /topics/
 
       <a href="{{ site.baseurl }}{{ topic.url }}" class="read-more">Read More</a>
     </article>
+        {% endif %}
+    {% endfor %}
   {% endfor %}
 </div>
