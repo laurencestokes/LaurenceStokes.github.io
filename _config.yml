@@ -19,6 +19,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:path/
+  topics:
+    output: true
+    permalink: /topics/:path/
 
 # Includes an icon in the footer for each username you enter
 footer-links:
@@ -45,7 +48,7 @@ disqus: lozstokes
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics:
 
-# Your website URL 
+# Your website URL
 # Used for Sitemap.xml and your RSS feed
 url: www.lozstokes.co.uk
 

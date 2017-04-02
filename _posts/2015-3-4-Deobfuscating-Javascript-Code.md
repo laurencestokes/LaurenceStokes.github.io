@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Deobfuscating Javascript Code
+tags:
+  - security
 ---
 
 In software development, obfuscation is the intentional structuring of code to make it difficult to interpret by humans. Typically, this is done to prevent reverse engineering or to conceal the purpose of the code, which is known as __security through obscurity.__ Many malicious malware binaries obfuscate their code to this end – as do javascript malware exploits, which use javascript and the users browser as their delivery mechanism. Not only does obfuscation render reverse-engineering the malware harder, it also makes it more likely to bypass virus scanners. The virus scanner might be looking for certain signatures (evidence of shellcode payloads, for example) that may go unnoticed if the malware is sufficiently obfuscated.
