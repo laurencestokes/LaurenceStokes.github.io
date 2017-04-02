@@ -1,8 +1,9 @@
 ---
 title: "Security"
+excerpt: (Mainly) Software Security, Web Security and Cryptography.
 ---
 
-<p>(Mainly) Software Security, Web Security and Cryptography.</p>
+
 
 
 <div class="posts">

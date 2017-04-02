@@ -1,9 +1,7 @@
 ---
 title: "Development"
+excerpt: "Thoughts on software development"
 ---
-
-<p>Thoughts on software development</p>
-<!-- more -->
 
 <div class="posts">
   {% for post in site.posts %}
