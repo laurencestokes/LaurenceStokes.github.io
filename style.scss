@@ -158,7 +158,7 @@ img {
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 2px solid $blue; 
+  border-bottom: 2px solid $blue;
 
   @include mobile {
     text-align: center;
@@ -247,8 +247,8 @@ nav {
 //
 
 .posts > .post {
-  padding-bottom: 2em;
-  //border-bottom: 2px solid $darkGray;
+  padding-bottom: 1em;
+  border-bottom: 2px solid $blue;
 }
 
 .posts > .post:last-child {
@@ -287,7 +287,7 @@ footer {
   border-top: 2px solid $blue;
   //border-bottom: 1px solid #ddd;
   //background-color: $lightGray;
-  
+
   p{
 	font-size: smaller;
 	padding-top: 5px;
