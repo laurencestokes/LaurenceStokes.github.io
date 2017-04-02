@@ -22,6 +22,7 @@ collections:
   topics:
     output: true
     permalink: /topics/:path/
+    layout: page
 
 # Includes an icon in the footer for each username you enter
 footer-links:
