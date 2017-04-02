@@ -248,7 +248,7 @@ nav {
 
 .posts > .post {
   padding-bottom: 1em;
-  border-bottom: 2px solid $blue;
+  border-bottom: 2px dashed $blue;
 }
 
 .posts > .post:last-child {
