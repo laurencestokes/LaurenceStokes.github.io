@@ -7,11 +7,7 @@ permalink: /topics/
 <div class="posts">
   {% for topic in site.topics %}
     <article class="post">
-      {% for tag in site.tags %}
-        {% if tag == topic %}
-          {% assign count = site.tags[tag].size %}
-        {% endif %}
-      {% endfor %}
+      
       <h1 class="post-title"><a href="{{ site.baseurl }}{{ topic.url }}">{{ topic.title }}</a>: {{count}}</h1>
 
       <div class="entry">
