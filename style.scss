@@ -297,7 +297,7 @@ footer {
 }
 
  .navbar-active {
-   color: $blue;
+   border-bottom: 1px solid $blue;
  }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
