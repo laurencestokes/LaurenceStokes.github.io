@@ -13,11 +13,11 @@ Of course, it should go without staying, but all of the opinions and suchlike ex
 
 You may reach me via the following email, or on any of the social links in the footer below if you are so inclined. If you want to use PGP my key is also provided (with verification) below, and I can also be found on [Keybase](https://keybase.io/liggles){:target="_blank"}
 
-**Email**: (personal): loz (at) lozstokes (dot) co (dot) uk
+**__Email__**: *(personal)*: loz (at) lozstokes (dot) co (dot) uk
 
-**PGP Key**: 0x71bde1e6 *[Verification](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x1048364371BDE1E6){:target="_blank"}*
+**__PGP Key__**: 0x71bde1e6 *[Verification](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x1048364371BDE1E6){:target="_blank"}*
 
-**[Keybase]**(https://keybase.io/liggles){:target="_blank"}
+**__[Keybase](https://keybase.io/liggles){:target="_blank"}__**
 
 ### Attributions
 
