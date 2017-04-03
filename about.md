@@ -4,30 +4,25 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hi, I'm Laurence Stokes. I'm a fullstack Software Developer who is using this blog/site to document my adventures in the arena of software development, computer security, and other computer science related interests.
 
-### More Information
+Of course, it should go without staying, but all of the the opinions and suchlike expressed herein are my own and not that of my employer/past employers/past employer's cat.
 
-A place to include any other types of information that you'd like to include about yourself.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+You may reach me via the following email, or on any of the social links in the footer below if you are so inclined. If you want to use PGP my key is also provided (with verification) below, and I can also be found on [Keybase](https://keybase.io/liggles){:target="_blank"}
+
+**Email**: (personal): loz (at) lozstokes (dot) co (dot) uk
+**PGP Key**: 0x71bde1e6 *[Verification](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x1048364371BDE1E6){:target="_blank"}*
+**[Keybase]**(https://keybase.io/liggles){:target="_blank"}
 
 ### Attributions
 
-Below are some
+Listed below are some of the libraries, resources, and individuals to whom I owe my thanks in providing code/inspiration for this blog:
 
  **[Typed.js](http://www.mattboldt.com/demos/typed-js/){:target="_blank"}**
 
- *"Typed.js is a javascript library that types out sentences."*
-
-
  **[CSSTerm](https://github.com/nstephens/cssterm){:target="_blank"}**
 
- *"Easy method to display a linux terminal on a webpage using pure CSS, powered by jQuery.""*
-
-
  **[Jquery Terminal](http://terminal.jcubic.pl/){:target="_blank"}**
-
- *"JQuery Terminal Emulator is a plugin for creating command line interpreters in your applications."*
