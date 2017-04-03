@@ -3,9 +3,6 @@ title: "Security"
 excerpt: (Mainly) Software Security, Web Security and Cryptography.
 ---
 
-
-
-
 <div class="posts">
   {% for post in site.posts %}
     {% if post.tags contains 'security' %}
