@@ -8,11 +8,11 @@ tags:
 
 In software development, obfuscation is the intentional structuring of code to make it difficult to interpret by humans. Typically, this is done to prevent reverse engineering or to conceal the purpose of the code, which is known as __security through obscurity.__ Many malicious malware binaries obfuscate their code to this end – as do javascript malware exploits, which use javascript and the users browser as their delivery mechanism. Not only does obfuscation render reverse-engineering the malware harder, it also makes it more likely to bypass virus scanners. The virus scanner might be looking for certain signatures (evidence of shellcode payloads, for example) that may go unnoticed if the malware is sufficiently obfuscated.
 
-In this blog post I am going to go through and deobfuscate some javascript code, courtesy of [www.scumware.org](http://www.scumware.org), a website dedicated to malware analysis and research.
+In this blog post I am going to go through and deobfuscate some javascript code, courtesy of [www.scumware.org](https://www.scumware.org), a website dedicated to malware analysis and research.
 
 Although a contrived example (you would never see a password checker like this in ‘real-life’), the basic principles and step-by-step processes remain the same. In fact, I like the scumware.org series of challenges and feel they present a nice introduction to javascript deobfuscation. Finding a password also provides a nice ‘end goal’ to each challenge!
 
-Anyway, with that long preamble aside, let’s jump right into the challenge, which can be found at: [http://www.scumware.org/skill_up/WarmUp_lvl1.scumware](http://www.scumware.org/skill_up/WarmUp_lvl1.scumware)
+Anyway, with that long preamble aside, let’s jump right into the challenge, which can be found at: [http://www.scumware.org/skill_up/WarmUp_lvl1.scumware](https://www.scumware.org/skill_up/WarmUp_lvl1.scumware)
 
 On loading the webpage, you will be presented with a input form and a password check. First things first, let’s view source. (right click the page: view page source)!
 
@@ -214,4 +214,4 @@ We know VArray[30] is the password, so that’s simply asking us to unescape(‘
 
 ![scumwarePart7](../../images/scumwarePart7.png)
 
-Now you can try [level 2](http://www.scumware.org/skill_up/Bring_me_lvl2.scumware) on your own!
+Now you can try [level 2](https://www.scumware.org/skill_up/Bring_me_lvl2.scumware) on your own!
