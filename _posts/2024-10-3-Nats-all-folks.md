@@ -95,21 +95,23 @@ The final piece of the puzzle was allowing limited, one-way communication from m
 Here's what I did:
 
 1. I SSH'd into my ASUS router:
-   ```bash
-   ssh <router-username>@<router-ip-address> -p <router-ssh-port>
-   ```
+
+```bash
+ssh <router-username>@<router-ip-address> -p <router-ssh-port>
+```
 
 2. Then, I added these iptables rules:
-   ```bash
-   # Allow traffic from main network to IoT VLAN
-   iptables -I FORWARD -s 192.168.50.0/24 -d 192.168.52.0/24 -j ACCEPT
 
-   # Allow established/related return traffic
-   iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+```bash
+# Allow traffic from main network to IoT VLAN
+iptables -I FORWARD -s 192.168.50.0/24 -d 192.168.52.0/24 -j ACCEPT
 
-   # Block unsolicited traffic from IoT VLAN to main network
-   iptables -I FORWARD -s 192.168.52.0/24 -d 192.168.50.0/24 -m state --state NEW -j DROP
-   ```
+# Allow established/related return traffic
+iptables -I FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Block unsolicited traffic from IoT VLAN to main network
+iptables -I FORWARD -s 192.168.52.0/24 -d 192.168.50.0/24 -m state --state NEW -j DROP
+```
 
 These rules allow my devices on the main network to initiate communication with IoT devices, but prevent IoT devices from starting connections to the main network. 
 
