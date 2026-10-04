@@ -1,0 +1,69 @@
+---
+layout: default
+title: Lab
+lab: true
+permalink: /lab/
+---
+<div id="lab-workspace">
+  <header class="lab-heading">
+    <div><p class="eyebrow">Personal lab / Investigation desk</p><h1>Follow your curiosity<span>.</span></h1><p>A terminal, a trail of evidence, and eight flags to find.</p></div>
+    <p class="lab-heading-note">A few things are hidden here.<br><span>Curiosity is the only prerequisite.</span></p>
+  </header>
+  <nav class="lab-dock" aria-label="Lab views">
+    <a href="{{ site.baseurl }}/lab/?view=terminal" data-lab-view="terminal"><span aria-hidden="true">&gt;_</span> Terminal</a>
+    <a href="{{ site.baseurl }}/lab/?view=case" data-lab-view="case"><span aria-hidden="true">⌑</span> Case files</a>
+    <a href="{{ site.baseurl }}/lab/?view=rewards" data-lab-view="rewards"><span aria-hidden="true">✳</span> Rewards</a>
+    <span class="lab-dock-progress" data-lab-progress aria-live="polite"></span>
+  </nav>
+  <div class="lab-work has-case" id="lab-work">
+    <div class="lab-terminal-column">
+      {% include terminal-window.html %}
+      <p id="terminal-help" class="terminal-help">Enter executes · ↑ / ↓ history · Tab completes · Try <code>help</code><br><span>Commands run only in this page. Progress is shared with <a href="{{ site.baseurl }}/ctf/">all challenges</a>.</span></p>
+    </div>
+    <aside class="lab-case-panel" id="lab-case-panel" aria-labelledby="lab-case-title">
+      <div class="lab-panel-bar"><span>CASE FILE / 006</span><a href="{{ site.baseurl }}/lab/?view=terminal" data-lab-view="terminal" aria-label="Close case notes">×</a></div>
+      <div class="lab-case-body">
+        <p class="eyebrow">Terminal investigation</p><h2 id="lab-case-title" tabindex="-1">Who left the door open?</h2>
+        <p>A service account was used after hours. A backup was somewhere it shouldn’t be. Follow the logs and server snapshot to tie up three loose ends.</p>
+        <ul class="lab-objectives" aria-label="Case objectives">
+          <li data-lab-check="entry"><span class="lab-check-symbol" aria-hidden="true">○</span><span>Identify the account</span><span class="lab-check-status sr-only">Open</span></li>
+          <li data-lab-check="exposure"><span class="lab-check-symbol" aria-hidden="true">○</span><span>Find the open door</span><span class="lab-check-status sr-only">Open</span></li>
+          <li data-lab-check="receipt"><span class="lab-check-symbol" aria-hidden="true">○</span><span>Recover the receipt</span><span class="lab-check-status sr-only">Open</span></li>
+        </ul>
+        <div class="lab-case-progress" id="lab-case-count" aria-live="polite">Three flags to find</div>
+        <section class="lab-evidence" aria-labelledby="lab-evidence-title">
+          <h3 id="lab-evidence-title">Evidence trail</h3>
+          <p id="lab-evidence-empty">Files appear here as you read them in the terminal.</p>
+          <ul id="lab-evidence-list"></ul>
+          <p class="lab-fineprint">This trail stays for the current page session.</p>
+        </section>
+        <a class="lab-text-link" href="{{ site.baseurl }}/lab/?view=rewards" data-lab-view="rewards">Submit what you find <span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
+  </div>
+  <section id="lab-rewards-panel" class="lab-rewards-panel" aria-labelledby="lab-rewards-title">
+    <div class="lab-rewards-heading"><div><p class="eyebrow">A little proof of curiosity</p><h2 id="lab-rewards-title" tabindex="-1">Your collection.</h2><p>Bring back what you find. Every discovery earns its place here.</p></div><span class="lab-collection-count" id="lab-reward-count"></span></div>
+    <div class="lab-rewards-layout">
+      <div class="lab-badges">
+        <div class="lab-badge" data-lab-badge="original"><span class="lab-badge-symbol" aria-hidden="true">[&lt;/&gt;]</span><h3>Source seeker</h3><p>The original five</p><button type="button" data-lab-download="original" disabled>Locked · complete the hunt</button></div>
+        <div class="lab-badge" data-lab-badge="open-door"><span class="lab-badge-symbol" aria-hidden="true">[&gt;_]</span><h3>Incident responder</h3><p>All three case flags</p><button type="button" data-lab-download="open-door" disabled>Locked · close the case</button></div>
+        <div class="lab-badge" data-lab-badge="all"><span class="lab-badge-symbol" aria-hidden="true">[*]</span><h3>Field agent</h3><p>Every loose end</p><button type="button" data-lab-download="all" disabled>Locked · capture all eight</button></div>
+      </div>
+      <div class="lab-submit-panel">
+        <h3>Capture a flag.</h3><p>Submit an investigation flag, or the complete phrase from the original hunt.</p>
+        <form id="lab-submit">
+          <label for="lab-answer">Flag or phrase</label>
+          <input id="lab-answer" name="answer" type="text" placeholder="LOZ{…} or your five-part phrase" maxlength="256" required autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="lab-feedback" disabled>
+          <button class="lab-button" type="submit" disabled>Submit answer <span aria-hidden="true">↗</span></button>
+        </form>
+        <p id="lab-feedback" role="status" aria-live="polite"></p>
+        <p id="lab-storage" class="lab-fineprint">Enable JavaScript to check answers and save progress.</p>
+      </div>
+    </div>
+    <a class="lab-text-link" href="{{ site.baseurl }}/lab/?view=case" data-lab-view="case">Continue investigating <span aria-hidden="true">↗</span></a>
+    <a class="lab-manage-link" href="{{ site.baseurl }}/ctf/">All challenges, hints &amp; progress settings <span aria-hidden="true">↗</span></a>
+  </section>
+  <p id="lab-workspace-feedback" class="lab-fineprint" role="status"></p>
+  <noscript><p class="lab-no-script">Enable JavaScript to use the investigation desk. You can still read <a href="{{ site.baseurl }}/ctf/">the challenge briefs</a>, <a href="{{ site.baseurl }}/blog/">the blog</a>, and <a href="{{ site.baseurl }}/projects/">the projects</a>.</p></noscript>
+</div>
+{% include lab-content.html %}

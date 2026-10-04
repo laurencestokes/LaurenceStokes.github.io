@@ -1,0 +1,22 @@
+<div class="terminal-mount">
+  <section id="terminal-window" aria-label="Interactive terminal simulation" data-state="connecting">
+    <div class="terminal-toolbar">
+      <span class="terminal-title"><span class="terminal-led" aria-hidden="true"></span>loz@localhost:~</span>
+      <div class="terminal-window-controls">
+        <button id="intro-control" type="button" hidden>Skip intro <span aria-hidden="true">↠</span></button>
+        <button type="button" data-terminal-action="minimise" aria-label="Minimise terminal" title="Minimise terminal" hidden><span aria-hidden="true">−</span></button>
+        <button type="button" data-terminal-action="expand" aria-label="Expand terminal" aria-pressed="false" title="Expand terminal" hidden><span aria-hidden="true">⛶</span></button>
+      </div>
+    </div>
+    <div id="terminal-body">
+      <div id="terminal-intro" aria-label="Simulated exploit transcript"></div>
+      <div id="meterpreter" role="group" tabindex="0" aria-label="Command terminal" aria-describedby="terminal-help" hidden></div>
+      <noscript><p>This interactive simulation needs JavaScript. <a href="{{ site.baseurl }}/ctf/">Read the challenge briefs</a> or explore the writing below.</p></noscript>
+    </div>
+    <div class="terminal-footer"><span id="terminal-status" role="status">INITIALIZING MSFCONSOLE</span><span>Interactive simulation</span></div>
+  </section>
+  <div class="terminal-minimised" hidden>
+    <div><span class="eyebrow">Session on this page</span><p>Terminal minimised. Your session is still here.</p></div>
+    <button type="button" class="lab-button" data-terminal-action="restore">Restore terminal <span aria-hidden="true">↗</span></button>
+  </div>
+</div>

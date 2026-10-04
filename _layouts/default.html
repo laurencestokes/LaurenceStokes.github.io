@@ -37,10 +37,11 @@
     {% if page.title == "Challenges" %}
     <link rel="stylesheet" href="{{ site.baseurl }}/ctf.css">
     {% endif %}
-    {% if page.title == "Loz Stokes - Home" %}
+    {% if page.title == "Loz Stokes - Home" or page.lab %}
     <link rel="stylesheet" href="{{ site.baseurl }}/jquery.terminal-1.0.12.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/cssterm.css">
     {% endif %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/lab.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -49,7 +50,7 @@
     <script>var a = (function(){eval(atob("dmFyIGRvVGhpbmcgPSBmdW5jdGlvbihzdHIpIHsNCiAgICAgIHJldHVybiBidG9hKFN0cmluZy5mcm9tQ2hhckNvZGUuYXBwbHkobnVsbCwNCiAgICAgICAgc3RyLnJlcGxhY2UoL1xyfFxuL2csICIiKS5yZXBsYWNlKC8oW1xkYS1mQS1GXXsyfSkgPy9nLCAiMHgkMSAiKS5yZXBsYWNlKC8gKyQvLCAiIikuc3BsaXQoIiAiKSkNCiAgICAgICk7DQogICAgfQ==")); return doThing;})();
     var b = window.atob;</script>
   </head>
-  <body>
+  <body{% if page.lab %} class="lab-page"{% endif %}>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="pixel-field" aria-hidden="true"></div>
     <div class="container">
@@ -61,18 +62,22 @@
           <a href="{{ site.baseurl }}{{ section_path }}"{% if page.url contains section_path %} aria-current="page"{% endif %}><span class="nav-index" aria-hidden="true">[{{ forloop.index | prepend: "0" }}]</span> {{ item }}</a>
           {% endfor %}
         </nav>
+        {% include lab-launcher.html %}
       </header>
       <main id="main" tabindex="-1">{{ content }}</main>
     </div>
     <script src="{{ site.baseurl }}/scripts/jquery-3.7.1.min.js"></script>
-    {% if page.title == "Loz Stokes - Home" or page.title == "Challenges" %}
+    {% if page.title == "Loz Stokes - Home" or page.title == "Challenges" or page.lab %}
     <script src="{{ site.baseurl }}/scripts/ctf-content.js"></script>
     <script src="{{ site.baseurl }}/scripts/ctf.js"></script>
     {% endif %}
-    {% if page.title == "Loz Stokes - Home" %}
+    {% if page.title == "Loz Stokes - Home" or page.lab %}
     <script src="{{ site.baseurl }}/scripts/typed.min.js"></script>
+    <script src="{{ site.baseurl }}/scripts/terminal-storage.js"></script>
     <script src="{{ site.baseurl }}/scripts/jquery.terminal-1.0.12.min.js"></script>
+    <script>window.LozTerminalStorage.finish();</script>
     <script src="{{ site.baseurl }}/scripts/lab-shell.js"></script>
+    <script src="{{ site.baseurl }}/scripts/local-address.js"></script>
     <script src="{{ site.baseurl }}/scripts/cssterm.js"></script>
     <script>
     // <----Security through Obscurity---->
@@ -81,6 +86,8 @@
     </script>
     {% endif %}
     {% include footer.html %}
+    <script src="{{ site.baseurl }}/scripts/lab-launcher.js"></script>
+    {% if page.lab %}<script src="{{ site.baseurl }}/scripts/lab-workspace.js"></script>{% endif %}
     <script src="{{ site.baseurl }}/scripts/pixel-field.js"></script>
     {% include analytics.html %}
   </body>

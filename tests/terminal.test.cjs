@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const vm = require("node:vm");
 const path = require("node:path");
 
-function createShell(ctf) {
+function createShell(ctf, onEvidence) {
   const context = {
     window: {},
     sessionStorage: { getItem: () => null, setItem: () => {} },
@@ -33,6 +33,7 @@ function createShell(ctf) {
     { ip: "Unavailable", local: "Unavailable", provider: "Unavailable" },
     { "legacy.txt": "Preserved content" },
     ctf,
+    onEvidence,
   );
 }
 
@@ -118,6 +119,80 @@ test("session transitions preserve cwd and do not expose a closed shell", () => 
   run("exploit");
   assert.equal(shell.connected(), true);
   assert.equal(run("pwd"), "/home/visitor/blog");
+});
+
+test("case discoveries follow successful readers and decoders with canonical paths", () => {
+  const root = "/cases/fixture",
+    events = [],
+    ctf = {
+      caseRoot: root,
+      files: {
+        [root + "/brief.txt"]: "Synthetic case\n",
+        [root + "/logs/event.txt"]: "First line\nMatched line\n",
+        [root + "/encoded.txt"]:
+          Buffer.from("Synthetic evidence").toString("base64"),
+        [root + "/invalid.txt"]: "###",
+        [root + "/invalid-utf8.txt"]: "/w==",
+        [root + "-other/outside.txt"]: "Outside the case boundary",
+      },
+    },
+    shell = createShell(ctf, (event) => events.push(event)),
+    run = (input) => shell.execute(input, []);
+
+  run("case");
+  run("cat ./logs/../logs/event.txt");
+  run("head -n 1 logs/event.txt");
+  run("tail -n 1 logs/event.txt");
+  run("grep Matched logs/event.txt");
+  run("base64 -d ./logs/../encoded.txt");
+  assert.deepEqual(
+    events.map((event) => event.path),
+    [
+      root + "/brief.txt",
+      ...Array(4).fill(root + "/logs/event.txt"),
+      root + "/encoded.txt",
+    ],
+  );
+  assert.ok(events.every((event) => Object.keys(event).join() === "path"));
+
+  const before = events.length;
+  for (const command of [
+    "cat missing.txt",
+    "cat logs",
+    "head -n nope logs/event.txt",
+    "grep incomplete",
+    "base64 -d invalid.txt",
+    "base64 -d invalid-utf8.txt",
+    "base64 -d missing.txt",
+    "base64 -d logs",
+    "base64 -d aGVsbG8=",
+    "cat ../fixture-other/outside.txt",
+    "cat ~/secretfile.txt",
+    "cat ~/legacy.txt",
+    "ls -la",
+    "tree",
+    "pwd",
+  ])
+    run(command);
+  assert.equal(
+    events.length,
+    before,
+    "failed reads, literal decodes, listings and legacy files stay private",
+  );
+});
+
+test("a failed evidence observer cannot break a valid shell read", () => {
+  const root = "/cases/fixture",
+    shell = createShell(
+      {
+        caseRoot: root,
+        files: { [root + "/brief.txt"]: "Synthetic case\n" },
+      },
+      () => {
+        throw new Error("Presentation failed");
+      },
+    );
+  assert.equal(shell.execute("case", []), "Synthetic case");
 });
 
 test("challenge files require both long and all listing flags", () => {

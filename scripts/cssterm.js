@@ -73,54 +73,10 @@
     } catch (_) {
       failed();
     }
-    // Modern browsers may hide the local address behind mDNS; never invent one.
-    var Peer = window.RTCPeerConnection || window.webkitRTCPeerConnection;
-    var peer, timeout;
-    function closePeer() {
-      clearTimeout(timeout);
-      if (peer) {
-        peer.onicecandidate = null;
-        peer.close();
-        peer = null;
-      }
-      if (info.local === "Looking up…")
-        info.local = "Unavailable (browser privacy)";
+    window.LozLocalAddress(function (address) {
+      info.local = address;
       onChange(info);
-    }
-    if (Peer) {
-      try {
-        peer = new Peer({ iceServers: [] });
-        peer.createDataChannel("local-address");
-        peer.onicecandidate = function (event) {
-          if (!event.candidate) {
-            closePeer();
-            return;
-          }
-          var parts = event.candidate.candidate.split(" "),
-            address = parts[4];
-          if (
-            parts[7] === "host" &&
-            address &&
-            /^[a-f\d.:]+$/i.test(address) &&
-            address !== "0.0.0.0"
-          ) {
-            info.local = address;
-            closePeer();
-          }
-        };
-        timeout = setTimeout(closePeer, 3000);
-        peer
-          .createOffer()
-          .then(function (offer) {
-            if (peer) return peer.setLocalDescription(offer);
-          })
-          .catch(closePeer);
-      } catch (_) {
-        closePeer();
-      }
-    } else {
-      info.local = "Unavailable (browser privacy)";
-    }
+    });
     return info;
   }
   window.LozLab = {
@@ -138,7 +94,11 @@
         generation = 0,
         booting = false,
         terminal,
-        leaving = false;
+        leaving = false,
+        suspended = false,
+        busy = false,
+        pendingOutput = Promise.resolve(),
+        commandQueue = Promise.resolve();
       var content = JSON.parse(
         document.getElementById("lab-content").textContent,
       );
@@ -149,11 +109,17 @@
         });
       }
       var visitor = visitorInfo(refresh);
+      function publish(name, detail) {
+        window.dispatchEvent(new CustomEvent(name, { detail: detail }));
+      }
       var shell = new window.LozShell(
         content,
         visitor,
         originalFiles,
         window.LozCTF,
+        function (evidence) {
+          publish("loz:case-evidence", evidence);
+        },
       );
       var openCase =
         new URLSearchParams(window.location.search).get("case") === "open-door";
@@ -244,74 +210,93 @@
           });
       }
       function update() {
-        terminal.set_prompt(shell.prompt());
-        frame.dataset.state = shell.connected() ? "connected" : "closed";
-        status.textContent = shell.status();
+        if (terminal) terminal.set_prompt(shell.prompt());
+        if (!booting) {
+          frame.dataset.state = shell.connected() ? "connected" : "closed";
+          status.textContent = shell.status();
+        }
+        publish("loz:terminal-state", {
+          state: frame.dataset.state,
+          ready: !!terminal && !booting,
+          connected: shell.connected(),
+          busy: busy,
+          status: status.textContent,
+        });
+      }
+      function visible() {
+        return !booting && host.getClientRects().length > 0;
+      }
+      function interpret(input) {
+        var term = this;
+        var display = shell.isSubmission(input) ? "submit [answer]" : input;
+        term.echo($.terminal.escape_brackets(shell.prompt() + display));
+        var output = shell.execute(input, term.history().data());
+        function print(value) {
+          if (value === null) {
+            term.clear();
+            boot.hidden = true;
+          } else if (value) term.echo($.terminal.escape_brackets(value));
+          update();
+        }
+        if (output && typeof output.then === "function") {
+          busy = true;
+          control.disabled = true;
+          update();
+          pendingOutput = Promise.resolve(output)
+            .then(print, function () {
+              print("Could not check that submission. Try again.");
+            })
+            .finally(function () {
+              busy = false;
+              control.disabled = false;
+              update();
+            });
+          // jQuery Terminal pauses until this promise settles, including calls
+          // through exec(). Returning undefined from print avoids double echo.
+          return pendingOutput;
+        }
+        print(output);
       }
       function ready() {
         booting = false;
         host.hidden = false;
         shell.reconnect();
         if (!terminal) {
-          terminal = $(host).terminal(
-            function (input) {
-              var term = this;
-              var display = shell.isSubmission(input)
-                ? "submit [answer]"
-                : input;
-              term.echo($.terminal.escape_brackets(shell.prompt() + display));
-              var output = shell.execute(input, this.history().data());
-              function print(value) {
-                if (value === null) {
-                  term.clear();
-                  boot.hidden = true;
-                } else if (value) term.echo($.terminal.escape_brackets(value));
-                update();
+          terminal = $(host).terminal(interpret, {
+            greetings:
+              "GNU bash, version 4.3.42(5)-release (x86_64). Type 'help' to see available commands.",
+            name: "loz_lab",
+            prompt: shell.prompt(),
+            enabled: false,
+            exit: false,
+            historySize: 100,
+            historyFilter: function (input) {
+              return !shell.isSubmission(input);
+            },
+            outputLimit: 250,
+            convertLinks: false,
+            echoCommand: false,
+            completion: function (input, callback) {
+              callback(shell.complete(this.before_cursor(false)));
+            },
+            onClear: function () {
+              boot.hidden = true;
+            },
+            onResume: function () {
+              // The old terminal library enables its input on resume. Keep
+              // a minimised or backgrounded pane from taking the keyboard.
+              if (suspended || !visible() || !this.enabled()) this.disable();
+            },
+            keydown: function (event) {
+              if (event.key === "Escape") {
+                leaving = true;
+                terminal.disable();
+                host.focus();
+                leaving = false;
+                return false;
               }
-              if (output && typeof output.then === "function") {
-                term.pause();
-                control.disabled = true;
-                output
-                  .then(print, function () {
-                    print("Could not check that submission. Try again.");
-                  })
-                  .finally(function () {
-                    control.disabled = false;
-                    term.resume();
-                  });
-              } else print(output);
             },
-            {
-              greetings:
-                "GNU bash, version 4.3.42(5)-release (x86_64). Type 'help' to see available commands.",
-              name: "loz_lab",
-              prompt: shell.prompt(),
-              enabled: false,
-              exit: false,
-              historySize: 100,
-              historyFilter: function (input) {
-                return !shell.isSubmission(input);
-              },
-              outputLimit: 250,
-              convertLinks: false,
-              echoCommand: false,
-              completion: function (input, callback) {
-                callback(shell.complete(this.before_cursor(false)));
-              },
-              onClear: function () {
-                boot.hidden = true;
-              },
-              keydown: function (event) {
-                if (event.key === "Escape") {
-                  leaving = true;
-                  terminal.disable();
-                  host.focus();
-                  leaving = false;
-                  return false;
-                }
-              },
-            },
-          );
+          });
           $(host).find("textarea").attr({
             tabindex: -1,
             "aria-label": "Terminal command input",
@@ -327,7 +312,10 @@
             .attr({ role: "log", "aria-live": "polite" });
           // jQuery Terminal owns editing, history and completion. Escape releases focus.
           host.addEventListener("focus", function () {
-            if (!booting && !leaving) terminal.enable();
+            if (!booting && !leaving) {
+              suspended = false;
+              terminal.enable();
+            }
           });
           if (document.fonts)
             document.fonts.ready.then(function () {
@@ -338,6 +326,10 @@
         update();
         control.textContent = "Replay intro ↻";
         control.setAttribute("aria-label", "Replay terminal intro");
+        publish("loz:terminal-ready", {
+          connected: shell.connected(),
+          status: shell.status(),
+        });
         if (openCase) {
           openCase = false;
           boot.hidden = true;
@@ -345,6 +337,7 @@
         }
       }
       function settle() {
+        if (terminal && !booting) return;
         stop();
         transcript();
         ready();
@@ -359,6 +352,7 @@
         status.textContent = "INITIALIZING MSFCONSOLE";
         control.textContent = "Skip intro ↠";
         control.setAttribute("aria-label", "Skip terminal intro");
+        update();
         if (reduced.matches) {
           settle();
           return;
@@ -391,7 +385,10 @@
             target = node.querySelector("[data-command]");
           var isVisitor = index >= 1 && index <= 9;
           node.style.visibility = "visible";
-          if (stages[index]) status.textContent = stages[index];
+          if (stages[index]) {
+            status.textContent = stages[index];
+            update();
+          }
           function advance() {
             if (run === generation)
               timer = setTimeout(function () {
@@ -469,7 +466,42 @@
       reduced.addEventListener("change", function () {
         if (reduced.matches && booting) settle();
       });
-      if (openCase) settle();
+      window.LozLab.session = {
+        run: function (input) {
+          if (typeof input !== "string")
+            return Promise.reject(
+              new TypeError("A terminal command must be text."),
+            );
+          var next = commandQueue.then(function () {
+            return pendingOutput.then(function () {
+              settle();
+              return Promise.resolve(terminal.exec(input)).then(function () {});
+            });
+          });
+          // One failed API call must not prevent subsequent commands.
+          commandQueue = next.catch(function () {});
+          return next;
+        },
+        focus: function () {
+          settle();
+          if (!visible()) return;
+          suspended = false;
+          host.focus({ preventScroll: true });
+          terminal.focus();
+        },
+        blur: function () {
+          suspended = true;
+          if (terminal) terminal.disable();
+        },
+        resize: function () {
+          if (terminal && visible()) terminal.resize();
+        },
+        settle: settle,
+      };
+      if (document.getElementById("lab-workspace")) {
+        settle();
+        boot.hidden = true;
+      } else if (openCase) settle();
       else intro();
     },
   };

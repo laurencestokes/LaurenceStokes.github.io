@@ -1,7 +1,13 @@
 /* A text-only, read-only virtual machine. Never evaluates command input. */
 (function (window) {
   "use strict";
-  window.LozShell = function (content, visitor, originalFiles, ctf) {
+  window.LozShell = function (
+    content,
+    visitor,
+    originalFiles,
+    ctf,
+    onEvidence,
+  ) {
     var home = "/home/visitor";
     var cwd = home,
       previous = home,
@@ -97,7 +103,22 @@
       if (!has(full))
         return command + ": " + path + ": No such file or directory";
       if (fs[full] === null) return command + ": " + path + ": Is a directory";
+      discover(full);
       return fs[full].replace(/\n$/, "");
+    }
+    function discover(path) {
+      if (
+        typeof onEvidence === "function" &&
+        ctf &&
+        path.indexOf(ctf.caseRoot + "/") === 0 &&
+        Object.prototype.hasOwnProperty.call(ctf.files, path)
+      ) {
+        // Observers receive a canonical path, never file contents or answers.
+        // A presentation failure must not stop an otherwise valid shell read.
+        try {
+          onEvidence({ path: path });
+        } catch (_) {}
+      }
     }
     function save() {
       try {
@@ -260,7 +281,9 @@
       if (command === "base64") {
         if (args.length !== 2 || ["-d", "--decode"].indexOf(args[0]) < 0)
           return "Usage: base64 -d <file-or-encoded-value>";
-        var source = has(resolve(args[1])) ? fs[resolve(args[1])] : args[1];
+        var sourcePath = resolve(args[1]);
+        var fromFile = has(sourcePath);
+        var source = fromFile ? fs[sourcePath] : args[1];
         if (source === null) return "base64: " + args[1] + ": Is a directory";
         source = source.replace(/\s/g, "");
         if (
@@ -273,7 +296,9 @@
           var bytes = Uint8Array.from(atob(source), function (char) {
             return char.charCodeAt(0);
           });
-          return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+          var decoded = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+          if (fromFile) discover(sourcePath);
+          return decoded;
         } catch (_) {
           return "base64: Invalid Base64 or UTF-8 text.";
         }

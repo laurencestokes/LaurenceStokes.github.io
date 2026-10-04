@@ -1,0 +1,10 @@
+<div class="lab-launcher">
+  <a class="lab-launch" data-lab-launch href="{{ site.baseurl }}/lab/"><span aria-hidden="true">▦</span> Lab</a>
+  <div id="lab-launcher-panel" class="lab-launcher-panel" hidden>
+    <p class="eyebrow">Your workspace</p>
+    <a href="{% if page.title == 'Loz Stokes - Home' %}#terminal-window{% else %}{{ site.baseurl }}/lab/?view=terminal{% endif %}" data-lab-destination="terminal"><span class="lab-launch-icon" aria-hidden="true">&gt;_</span><span><strong>Terminal</strong><small>Explore the simulated filesystem</small></span></a>
+    <a href="{{ site.baseurl }}/lab/?view=case" data-lab-destination="case"><span class="lab-launch-icon" aria-hidden="true">⌑</span><span><strong>Case files</strong><small>Open door · investigation</small></span></a>
+    <a href="{{ site.baseurl }}/lab/?view=rewards" data-lab-destination="rewards"><span class="lab-launch-icon" aria-hidden="true">✳</span><span><strong>Rewards</strong><small>Flags found. Curiosity rewarded.</small></span></a>
+    <div class="lab-launcher-foot"><span>LOZ / PERSONAL LAB</span><span data-lab-progress></span></div>
+  </div>
+</div>
