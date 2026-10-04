@@ -1,26 +1,39 @@
 <!--Meta Data-->
     <meta charset="utf-8" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="revisit-after" content="30 days" />
 
-    {% if page.excerpt %}
-    <meta name="description" content="{{ page.excerpt| strip_html }}" />
-    <meta property="og:description" content="{{ page.excerpt| strip_html }}" />
-    {% else %}
-    <meta name="description" content="{{ site.description }}">
-    <meta property="og:description" content="{{ site.description }}" />
-    {% endif %}
-    <meta name="author" content="{{ site.name }}" />
-    <meta property="og:image" content="https://www.lozstokes.co.uk/images/usesoap.jpg" />
-	
-    <link type="text/plain" rel="author" href="humans.txt" />
+    {% assign share_title = page.social_title | default: page.title | default: site.title | default: site.name %}
+    {% assign share_description = page.description | default: page.summary | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 200 %}
+    {% assign share_url = page.url | replace: 'index.html', '' | absolute_url %}
+    {% assign share_image = page.social_image | default: site.social_image %}
+    {% assign share_image_url = share_image.path | absolute_url %}
+    {% assign share_image_alt = share_image.alt | default: share_title %}
 
-    {% if page.title %}
-    <meta property="og:title" content="{{ page.title }}" />
-    <meta property="twitter:title" content="{{ page.title }}" />
-    {% endif %}
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="/" />
+    <meta name="description" content="{{ share_description | escape }}" />
+    <meta name="author" content="{{ site.title | default: site.name | escape }}" />
+    <link rel="canonical" href="{{ share_url | escape }}" />
+    <link type="text/plain" rel="author" href="{{ '/humans.txt' | relative_url }}" />
+
+    <meta property="og:title" content="{{ share_title | escape }}" />
+    <meta property="og:description" content="{{ share_description | escape }}" />
+    <meta property="og:type" content="{% if page.collection == 'posts' %}article{% else %}website{% endif %}" />
+    <meta property="og:url" content="{{ share_url | escape }}" />
+    <meta property="og:site_name" content="{{ site.name | escape }}" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content="{{ share_image_url | escape }}" />
+    <meta property="og:image:alt" content="{{ share_image_alt | escape }}" />
+    {% if share_image.type %}<meta property="og:image:type" content="{{ share_image.type | escape }}" />{% endif %}
+    {% if share_image.width %}<meta property="og:image:width" content="{{ share_image.width | escape }}" />{% endif %}
+    {% if share_image.height %}<meta property="og:image:height" content="{{ share_image.height | escape }}" />{% endif %}
+    {% if page.collection == 'posts' %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />{% endif %}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    {% if site.footer-links.twitter %}<meta name="twitter:site" content="@{{ site.footer-links.twitter | escape }}" />{% endif %}
+    <meta name="twitter:title" content="{{ share_title | escape }}" />
+    <meta name="twitter:description" content="{{ share_description | escape }}" />
+    <meta name="twitter:image" content="{{ share_image_url | escape }}" />
+    <meta name="twitter:image:alt" content="{{ share_image_alt | escape }}" />
     <!--End Meta Data-->

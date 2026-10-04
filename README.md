@@ -10,6 +10,12 @@ The footer and terminal read `site.github.build_revision` from Jekyll's GitHub m
 
 Post front matter can set `card_title`, `summary` and `home_featured` for the homepage cards without changing article titles or URLs.
 
+## Link previews
+
+`_includes/meta.html` renders Open Graph and Twitter/X cards in the HTML head, with an absolute canonical URL for each page. Descriptions prefer `description`, then `summary`, then a plain-text excerpt, then the site description. Set `social_title` to override a page's share title without changing its heading.
+
+The default share image is the existing `/images/usesoap.jpg`, configured under `social_image` in `_config.yml`. A page can override `social_image` with a mapping containing `path` and `alt`, plus optional `type`, `width` and `height`. Paths can be site-relative or absolute HTTPS URLs; dimensions must describe the actual image. Posts receive the `article` type and publication timestamp. Text is escaped for HTML attributes.
+
 ## Interactive terminal
 
 `scripts/cssterm.js` coordinates the original Typed.js animation and jQuery Terminal instance. `scripts/lab-shell.js` provides a read-only virtual filesystem and session state. The virtual blog and project files come from Jekyll content. Commands are parsed as text; they never run on a server or the visitor's machine.

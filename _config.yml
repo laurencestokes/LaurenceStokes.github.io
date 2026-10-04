@@ -9,6 +9,14 @@ title: Loz Stokes
 # Short bio or description (displayed in the header)
 description: Software/Web Developer from the UK
 
+# Default image for link previews; pages can override this same mapping.
+social_image:
+  path: /images/usesoap.jpg
+  alt: "Fight Club artwork showing a pink bar of soap and the words 'use soap.'"
+  type: image/jpeg
+  width: 543
+  height: 271
+
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars3.githubusercontent.com/u/6308252?v=3&s=460
 
