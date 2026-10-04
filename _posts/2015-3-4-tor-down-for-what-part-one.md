@@ -1,5 +1,8 @@
 ---
 layout: post
+card_title: "Tor down for what: how Tor works"
+summary: "An exploration of onion routing, encryption, and how Tor provides anonymity. Part one of two."
+home_featured: true
 title: TOR DOWN FOR WHAT (PART 1)&#58; HOW TOR WORKS
 tags:
   - security

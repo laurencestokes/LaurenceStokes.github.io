@@ -1,18 +1,8 @@
 ---
 layout: default
 ---
-
-<article class="post">
-  <h1>{{ page.title }}</h1>
-
-  <div class="entry">
-    {{ content }}
-  </div>
-
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
-  </div>
-  <br>
-
+<article class="post reading-width">
+  <header class="article-heading"><a class="text-link" href="{{ site.baseurl }}/blog/">← All writing</a><p class="eyebrow">{% for tag in page.tags %}{{ tag }}{% unless forloop.last %} / {% endunless %}{% endfor %}</p><h1>{{ page.title }}</h1><p class="date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %B %Y" }}</time></p></header>
+  <div class="entry">{{ content }}</div>
   {% include disqus.html %}
 </article>

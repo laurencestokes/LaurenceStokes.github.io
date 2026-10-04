@@ -1,5 +1,8 @@
 ---
 layout: post
+card_title: "Deobfuscating JavaScript"
+summary: "Following code that would rather stay hidden. A step-by-step introduction to JavaScript deobfuscation."
+home_featured: true
 title: Deobfuscating Javascript Code
 tags:
   - security

@@ -4,11 +4,12 @@ title: Topics
 permalink: /topics/
 ---
 
+<header class="page-heading"><p class="eyebrow">Follow a thread</p><h1>Topics</h1><p>Writing grouped by the things that interest me.</p></header>
 <div class="posts">
   {% for topic in site.topics %}
     <article class="post">
 
-      <h1><a href="{{ site.baseurl }}{{ topic.url }}">{{ topic.title }}</a></h1>
+      <h2><a href="{{ site.baseurl }}{{ topic.url }}">{{ topic.title }}</a></h2>
 
       <div class="entry">
         {{ topic.excerpt }}

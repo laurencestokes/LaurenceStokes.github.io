@@ -3,18 +3,5 @@ layout: default
 title: Blog
 permalink: /blog/
 ---
-
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
-
-      <h1 class="post-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>
+<header class="page-heading"><p class="eyebrow">Notes from the lab</p><h1>Blog</h1><p>Adventures in software, security, and the things I learn along the way.</p></header>
+<div class="card-grid blog-grid">{% for post in site.posts %}{% include post-card.html %}{% endfor %}</div>

@@ -1,5 +1,7 @@
 ---
 layout: post
+card_title: "Tor down for what: using Tor"
+summary: "The practical limits of anonymity, and the do’s and don’ts of using Tor. Part two of two."
 title: TOR DOWN FOR WHAT (PART 2)&#58; USING TOR
 tags:
   - security

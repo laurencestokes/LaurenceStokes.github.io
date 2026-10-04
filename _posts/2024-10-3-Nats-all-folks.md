@@ -1,6 +1,9 @@
 ---
 layout: post
 title: "NAT's All, Folks: How I Hardened My Home Network Setup"
+card_title: "NAT’s all, folks."
+summary: "How a few lag spikes became a home network overhaul: wired backhaul, VLANs, and isolated IoT devices."
+home_featured: true
 tags:
   - security
 ---
