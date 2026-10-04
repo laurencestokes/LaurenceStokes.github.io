@@ -1,0 +1,335 @@
+.ctf-heading {
+  padding: 74px 0 46px;
+  max-width: 870px;
+}
+.ctf-heading h1 {
+  font-size: clamp(43px, 6.4vw, 80px);
+  margin: 16px 0 20px;
+  letter-spacing: -0.05em;
+}
+.ctf-heading > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 18px;
+}
+.ctf-progress {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  font: 11px var(--mono);
+  color: var(--signal);
+  margin-top: 26px;
+}
+.ctf-pixels {
+  display: flex;
+  gap: 6px;
+}
+.ctf-pixels i {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #465f4e;
+  background: #121e16;
+}
+.ctf-pixels .captured {
+  background: var(--signal);
+  border-color: var(--signal);
+}
+.ctf-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+.ctf-cases {
+  display: grid;
+  gap: 20px;
+}
+.ctf-case {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 30px;
+  background: var(--panel);
+}
+.ctf-case-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font: 10px/1.7 var(--mono);
+  color: var(--muted);
+  letter-spacing: 0.4px;
+  margin-bottom: 22px;
+}
+.ctf-case h2 {
+  font-size: 29px;
+  margin: 0 0 14px;
+}
+.ctf-case > p {
+  font-size: 15px;
+  color: #b4c1b8;
+  line-height: 1.8;
+}
+.ctf-objective {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.ctf-objective .ctf-state {
+  margin-left: auto;
+  font: 10px var(--mono);
+  color: var(--muted);
+}
+.ctf-check {
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.ctf-objective.captured .ctf-check,
+.ctf-objective.captured .ctf-state {
+  color: var(--signal);
+}
+.ctf-case-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  font: 11px var(--mono);
+}
+.ctf-case-actions a {
+  padding: 9px 0;
+}
+.ctf-case-actions button,
+.ctf-reset button {
+  background: transparent;
+  border: 1px solid #465f4e;
+  color: #c5d3c9;
+  border-radius: 6px;
+  padding: 9px 12px;
+  font: 11px var(--mono);
+  min-height: 38px;
+}
+.ctf-case-actions button:hover,
+.ctf-reset button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.ctf-case .ctf-instruction {
+  font-size: 12px;
+  margin-top: 18px;
+}
+.ctf-hints {
+  font-size: 12px;
+  color: #bdcfc3;
+  padding-left: 20px;
+  list-style: decimal;
+}
+.ctf-hints:empty {
+  display: none;
+}
+.ctf-hints li {
+  margin: 14px 0 0;
+}
+.ctf-submit-panel {
+  border: 1px solid #41604b;
+  background: linear-gradient(145deg, #1a2b20, #0e1912);
+  padding: 28px;
+  border-radius: 14px;
+}
+.ctf-submit-panel h2 {
+  font-size: 28px;
+  margin: 8px 0 13px;
+}
+.ctf-submit-panel > p:not(.eyebrow) {
+  font-size: 14px;
+  color: #bdccc2;
+  line-height: 1.75;
+}
+.ctf-submit-panel label {
+  display: block;
+  font: 11px var(--mono);
+  margin: 22px 0 8px;
+  color: #c5d6cb;
+}
+.ctf-submit-panel input {
+  width: 100%;
+  min-width: 0;
+  background: #080f0b;
+  border: 1px solid #506959;
+  border-radius: 6px;
+  color: var(--ink);
+  padding: 12px;
+  font: 12px/1.7 var(--mono);
+}
+.ctf-submit-panel input::placeholder {
+  color: #98ad9f;
+}
+.ctf-submit-panel input[aria-invalid="true"] {
+  border-color: #c4a878;
+}
+.ctf-primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 11px;
+  background: var(--signal);
+  border: 0;
+  border-radius: 6px;
+  color: #102117;
+  padding: 12px 14px;
+  font: 12px var(--mono);
+  min-height: 44px;
+}
+.ctf-primary:hover {
+  background: #c4edcf;
+}
+.ctf-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+#ctf-feedback {
+  min-height: 1.8em;
+  margin: 14px 0 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+#ctf-feedback.accepted {
+  color: var(--signal);
+}
+.ctf-submit-panel .ctf-fineprint:not(.eyebrow) {
+  font: 10px/1.8 var(--mono);
+  color: #a4bbad;
+  margin: 15px 0 0;
+}
+.ctf-rewards {
+  padding: 27px 0 0;
+}
+.ctf-rewards h2 {
+  font-size: 25px;
+  margin: 5px 0 17px;
+}
+.ctf-badge {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 18px 0;
+}
+.ctf-badge-symbol {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border: 1px solid #3c5143;
+  border-radius: 9px;
+  color: #a1b5a8;
+  font: 15px var(--mono);
+  background: #111d16;
+}
+.ctf-badge h3 {
+  font-size: 17px;
+  letter-spacing: -0.4px;
+  margin: 0 0 5px;
+}
+.ctf-badge p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 5px;
+}
+.ctf-badge button {
+  padding: 5px 0;
+  background: none;
+  border: 0;
+  color: var(--accent);
+  font: 10px/1.7 var(--mono);
+  text-align: left;
+}
+.ctf-badge button:disabled {
+  color: #99afa1;
+  cursor: default;
+}
+.ctf-badge.earned .ctf-badge-symbol {
+  border-color: var(--signal);
+  color: var(--signal);
+  background: #182b1e;
+}
+.ctf-badge-all {
+  margin-top: 3px;
+}
+.ctf-reset {
+  font: 11px/1.8 var(--mono);
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: 8px;
+}
+.ctf-reset summary {
+  cursor: pointer;
+}
+.ctf-reset p {
+  margin: 12px 0;
+}
+.ctf-reset button {
+  margin: 0 5px 8px 0;
+}
+.ctf-closing {
+  font: 11px/1.9 var(--mono);
+  color: var(--muted);
+  padding: 40px 0 8px;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  .ctf-layout {
+    grid-template-columns: 1fr;
+  }
+  .ctf-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .ctf-rewards {
+    padding-top: 0;
+  }
+  .ctf-reset {
+    grid-column: 1/-1;
+  }
+  .ctf-heading {
+    padding-top: 36px;
+  }
+}
+@media (max-width: 550px) {
+  .ctf-sidebar {
+    grid-template-columns: 1fr;
+  }
+  .ctf-case,
+  .ctf-submit-panel {
+    padding: 21px;
+  }
+  .ctf-heading h1 {
+    letter-spacing: -0.05em;
+  }
+  .ctf-case h2 {
+    font-size: 27px;
+  }
+  .ctf-objective {
+    font-size: 12px;
+  }
+  .ctf-case-meta {
+    font-size: 9px;
+  }
+  .ctf-submit-panel input {
+    font-size: 16px;
+  }
+  .ctf-case-actions a,
+  .ctf-case-actions button,
+  .ctf-badge button {
+    min-height: 44px;
+  }
+}

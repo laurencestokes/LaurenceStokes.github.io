@@ -11,7 +11,7 @@ Before becoming a "professional" Software Developer I studied Computer Science a
 Of course, it should go without staying, but all of the opinions and suchlike expressed herein are my own and not that of my employer/past employers/past employer's cat.
 
 
-### Contact me
+## Contact me
 
 You may reach me via the following email, or on any of the social links in the site footer if you are so inclined. If you want to use PGP my key is also provided (with verification) below and can also be found on [Keybase](https://keybase.io/liggles){:target="_blank"}
 
@@ -21,7 +21,7 @@ You may reach me via the following email, or on any of the social links in the s
 
 **[Keybase](https://keybase.io/liggles){:target="_blank"}**
 
-### Attributions
+## Attributions
 
 Listed below are some of the libraries, resources, and individuals to whom I owe my thanks in creating this blog:
 

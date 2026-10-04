@@ -1,0 +1,59 @@
+---
+layout: default
+title: Challenges
+permalink: /ctf/
+---
+<div id="ctf-app">
+  <header class="ctf-heading">
+    <p class="eyebrow">Lozstokes / Capture the flag</p>
+    <h1>Follow the clues.</h1>
+    <p>Look a little closer. Connect the evidence. Bring back what you find.</p>
+    <div class="ctf-progress"><div class="ctf-pixels" aria-hidden="true">{% for i in (1..8) %}<i></i>{% endfor %}</div><span id="ctf-count">0 / 8 flags captured</span><a href="#ctf-answer">Submit a flag ↓</a></div>
+  </header>
+  <div class="ctf-layout">
+    <div class="ctf-cases">
+      <section class="ctf-case" id="original" aria-labelledby="original-title">
+        <div class="ctf-case-meta"><span>01 / THE ORIGINAL HUNT</span><span>5 flags</span></div>
+        <h2 id="original-title">Hidden in plain sight</h2>
+        <p>This site has always had a few secrets. Five numbered fragments are hidden beneath the surface. Find them, put them in order, and submit the complete phrase.</p>
+        <div class="ctf-objective" data-check="original"><span class="ctf-check" aria-hidden="true">○</span><span>Assemble the five-part phrase</span><span class="ctf-state">Open</span></div>
+        <div class="ctf-case-actions"><a href="{{ site.baseurl }}/#terminal-window">Explore the site <span aria-hidden="true">↗</span></a><button type="button" data-hint="original">Need a hint?</button></div>
+        <ol class="ctf-hints" data-hints="original" aria-label="Original hunt hints"></ol>
+      </section>
+      <section class="ctf-case" id="open-door" aria-labelledby="case-title">
+        <div class="ctf-case-meta"><span>02 / TERMINAL INVESTIGATION</span><span>3 flags · 5–10 min</span></div>
+        <h2 id="case-title">Who left the door open?</h2>
+        <p>A service account was used after hours. A backup was somewhere it shouldn’t be. You have the logs, a server snapshot, and three loose ends to tie up.</p>
+        <div class="ctf-objective" data-check="entry"><span class="ctf-check" aria-hidden="true">○</span><span>Identify the account</span><span class="ctf-state">Open</span></div>
+        <div class="ctf-objective" data-check="exposure"><span class="ctf-check" aria-hidden="true">○</span><span>Find the open door</span><span class="ctf-state">Open</span></div>
+        <div class="ctf-objective" data-check="receipt"><span class="ctf-check" aria-hidden="true">○</span><span>Recover the receipt</span><span class="ctf-state">Open</span></div>
+        <p class="ctf-instruction">Open the terminal and enter <code>case</code>. Everything you need is in the simulated filesystem.</p>
+        <div class="ctf-case-actions"><a href="{{ site.baseurl }}/?case=open-door#terminal-window">Start investigation <span aria-hidden="true">↗</span></a><button type="button" data-hint="open-door">Need a hint?</button></div>
+        <ol class="ctf-hints" data-hints="open-door" aria-label="Investigation hints"></ol>
+      </section>
+    </div>
+    <aside class="ctf-sidebar" aria-label="Submissions and rewards">
+      <section class="ctf-submit-panel" aria-labelledby="submit-title">
+        <p class="eyebrow">Bring back the evidence</p><h2 id="submit-title">Capture a flag.</h2>
+        <p>Submit a flag from the investigation, or the complete phrase from the original hunt.</p>
+        <form id="ctf-submit">
+          <label for="ctf-answer">Flag or phrase</label>
+          <input id="ctf-answer" name="answer" type="text" placeholder="LOZ{…} or your five-part phrase" maxlength="256" required autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="ctf-feedback" disabled>
+          <button class="ctf-primary" type="submit" disabled>Submit answer <span aria-hidden="true">↗</span></button>
+        </form>
+        <p id="ctf-feedback" role="status" aria-live="polite"></p>
+        <p id="ctf-storage" class="ctf-fineprint">Progress stays in this browser. No account needed.</p>
+        <noscript><p>Enable JavaScript to check answers and save progress.</p></noscript>
+      </section>
+      <section class="ctf-rewards" aria-labelledby="rewards-title">
+        <p class="eyebrow">Earned through curiosity</p><h2 id="rewards-title">Your badges</h2>
+        <div class="ctf-badge" data-badge="original"><span class="ctf-badge-symbol" aria-hidden="true">[&lt;/&gt;]</span><div><h3>Source seeker</h3><p>The original five</p><button type="button" data-download="original" disabled>Locked · complete the hunt</button></div></div>
+        <div class="ctf-badge" data-badge="open-door"><span class="ctf-badge-symbol" aria-hidden="true">[&gt;_]</span><div><h3>Incident responder</h3><p>All three case flags</p><button type="button" data-download="open-door" disabled>Locked · close the case</button></div></div>
+        <div class="ctf-badge ctf-badge-all" data-badge="all"><span class="ctf-badge-symbol" aria-hidden="true">[*]</span><div><h3>Field agent</h3><p>Every flag. Every loose end.</p><button type="button" data-download="all" disabled>Locked · capture all eight</button></div></div>
+      </section>
+      <details class="ctf-reset"><summary>Manage progress</summary><p>Clear the flags and hints saved in this browser to start again.</p><button type="button" id="ctf-reset">Reset my progress</button><div id="ctf-reset-confirm" hidden><p>Reset all saved flags and hints?</p><button type="button" id="ctf-reset-yes">Yes, reset</button><button type="button" id="ctf-reset-no">Keep progress</button></div></details>
+    </aside>
+  </div>
+  <p class="ctf-closing">No leaderboard. Just you, a terminal, and a few things worth noticing.</p>
+</div>
+<script src="{{ site.baseurl }}/scripts/ctf-page.js" defer></script>

@@ -32,15 +32,18 @@
                 Flag 1: "You".
 				-->
     {% include meta.html %}
-    <meta name="theme-color" content="#090b0d">
+    <meta name="theme-color" content="#050608">
     <link rel="stylesheet" href="{{ site.baseurl }}/style.css">
+    {% if page.title == "Challenges" %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/ctf.css">
+    {% endif %}
     {% if page.title == "Loz Stokes - Home" %}
     <link rel="stylesheet" href="{{ site.baseurl }}/jquery.terminal-1.0.12.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/cssterm.css">
     {% endif %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="icon" href="{{ site.baseurl }}/images/favicon.ico">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.baseurl }}/feed.xml">
     <script>var a = (function(){eval(atob("dmFyIGRvVGhpbmcgPSBmdW5jdGlvbihzdHIpIHsNCiAgICAgIHJldHVybiBidG9hKFN0cmluZy5mcm9tQ2hhckNvZGUuYXBwbHkobnVsbCwNCiAgICAgICAgc3RyLnJlcGxhY2UoL1xyfFxuL2csICIiKS5yZXBsYWNlKC8oW1xkYS1mQS1GXXsyfSkgPy9nLCAiMHgkMSAiKS5yZXBsYWNlKC8gKyQvLCAiIikuc3BsaXQoIiAiKSkNCiAgICAgICk7DQogICAgfQ==")); return doThing;})();
@@ -53,15 +56,19 @@
       <header class="site-header">
         <a class="site-brand" href="{{ site.baseurl }}/" aria-label="Loz Stokes home">lozstokes<span>_</span></a>
         <nav class="site-nav" aria-label="Website navigation">
-          {% assign navigation = "Blog,Topics,Projects,About" | split: "," %}
+          {% assign navigation = "Blog,Topics,Projects,CTF,About" | split: "," %}
           {% for item in navigation %}{% assign section_path = item | downcase | prepend: "/" | append: "/" %}
-          <a href="{{ site.baseurl }}{{ section_path }}"{% if page.url contains section_path %} aria-current="page"{% endif %}>{{ item }}</a>
+          <a href="{{ site.baseurl }}{{ section_path }}"{% if page.url contains section_path %} aria-current="page"{% endif %}><span class="nav-index" aria-hidden="true">[{{ forloop.index | prepend: "0" }}]</span> {{ item }}</a>
           {% endfor %}
         </nav>
       </header>
       <main id="main" tabindex="-1">{{ content }}</main>
     </div>
     <script src="{{ site.baseurl }}/scripts/jquery-3.7.1.min.js"></script>
+    {% if page.title == "Loz Stokes - Home" or page.title == "Challenges" %}
+    <script src="{{ site.baseurl }}/scripts/ctf-content.js"></script>
+    <script src="{{ site.baseurl }}/scripts/ctf.js"></script>
+    {% endif %}
     {% if page.title == "Loz Stokes - Home" %}
     <script src="{{ site.baseurl }}/scripts/typed.min.js"></script>
     <script src="{{ site.baseurl }}/scripts/jquery.terminal-1.0.12.min.js"></script>

@@ -149,7 +149,14 @@
         });
       }
       var visitor = visitorInfo(refresh);
-      var shell = new window.LozShell(content, visitor, originalFiles);
+      var shell = new window.LozShell(
+        content,
+        visitor,
+        originalFiles,
+        window.LozCTF,
+      );
+      var openCase =
+        new URLSearchParams(window.location.search).get("case") === "open-door";
       function row(text, className) {
         var node = document.createElement("p");
         node.className = className || "";
@@ -248,13 +255,31 @@
         if (!terminal) {
           terminal = $(host).terminal(
             function (input) {
-              this.echo($.terminal.escape_brackets(shell.prompt() + input));
+              var term = this;
+              var display = shell.isSubmission(input)
+                ? "submit [answer]"
+                : input;
+              term.echo($.terminal.escape_brackets(shell.prompt() + display));
               var output = shell.execute(input, this.history().data());
-              if (output === null) {
-                this.clear();
-                boot.hidden = true;
-              } else if (output) this.echo($.terminal.escape_brackets(output));
-              update();
+              function print(value) {
+                if (value === null) {
+                  term.clear();
+                  boot.hidden = true;
+                } else if (value) term.echo($.terminal.escape_brackets(value));
+                update();
+              }
+              if (output && typeof output.then === "function") {
+                term.pause();
+                control.disabled = true;
+                output
+                  .then(print, function () {
+                    print("Could not check that submission. Try again.");
+                  })
+                  .finally(function () {
+                    control.disabled = false;
+                    term.resume();
+                  });
+              } else print(output);
             },
             {
               greetings:
@@ -264,6 +289,9 @@
               enabled: false,
               exit: false,
               historySize: 100,
+              historyFilter: function (input) {
+                return !shell.isSubmission(input);
+              },
               outputLimit: 250,
               convertLinks: false,
               echoCommand: false,
@@ -310,6 +338,11 @@
         update();
         control.textContent = "Replay intro ↻";
         control.setAttribute("aria-label", "Replay terminal intro");
+        if (openCase) {
+          openCase = false;
+          boot.hidden = true;
+          terminal.exec("case");
+        }
       }
       function settle() {
         stop();
@@ -436,7 +469,8 @@
       reduced.addEventListener("change", function () {
         if (reduced.matches && booting) settle();
       });
-      intro();
+      if (openCase) settle();
+      else intro();
     },
   };
 })(window, jQuery);

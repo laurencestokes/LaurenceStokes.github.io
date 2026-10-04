@@ -1,7 +1,7 @@
 /* A text-only, read-only virtual machine. Never evaluates command input. */
 (function (window) {
   "use strict";
-  window.LozShell = function (content, visitor, originalFiles) {
+  window.LozShell = function (content, visitor, originalFiles, ctf) {
     var home = "/home/visitor";
     var cwd = home,
       previous = home,
@@ -9,7 +9,7 @@
       connected = true;
     var started = Date.now();
     var commands =
-      "help whoami getuid id sysinfo hostname uname pwd cd ls cat head tail tree grep echo env date uptime ps ip ipconfig ifconfig netstat history clear shell exit background sessions exploit git".split(
+      "help whoami getuid id sysinfo hostname uname pwd cd ls cat head tail tree grep echo env date uptime ps ip ipconfig ifconfig netstat history clear shell exit background sessions exploit git case challenges hint submit base64".split(
         " ",
       );
     var fs = Object.create(null);
@@ -42,6 +42,13 @@
     Object.keys(originalFiles).forEach(function (name) {
       fs[home + "/" + name] = originalFiles[name];
     });
+    if (ctf)
+      Object.keys(ctf.files).forEach(function (path) {
+        var parts = path.split("/");
+        for (var i = 2; i < parts.length; i++)
+          fs[parts.slice(0, i).join("/")] = null;
+        fs[path] = ctf.files[path];
+      });
     ["posts", "projects"].forEach(function (group) {
       (content[group] || []).forEach(function (item) {
         fs[
@@ -160,7 +167,21 @@
       var command = words[0],
         args = words.slice(1);
       if (command === "help")
-        return "Session\n  shell  exit  background  sessions [-i 1]  exploit\n\nFiles\n  pwd  cd <path>  ls [-la] [path]  tree [path]\n  cat <file>  head [-n count] <file>  tail [-n count] <file>\n  grep [-i] <text> <file>\n\nSystem\n  whoami  getuid  id  hostname  sysinfo  uname [-a]\n  env  ps  date  uptime  ip addr  ipconfig  ifconfig  netstat\n  git rev-parse [--short] HEAD\n\nConsole\n  echo <text>  history  clear\n  Enter executes. Up/Down history. Tab completes. Ctrl+L clears.\n  Press Escape, then Tab to leave the terminal.\n\nTry: shell, ls -la, cd blog, ls\nThis is a read-only simulation; there are no real shell processes.";
+        return "Session\n  shell  exit  background  sessions [-i 1]  exploit\n\nFiles\n  pwd  cd <path>  ls [-la] [path]  tree [path]\n  cat <file>  head [-n count] <file>  tail [-n count] <file>\n  grep [-i] <text> <file>\n\nSystem\n  whoami  getuid  id  hostname  sysinfo  uname [-a]\n  env  ps  date  uptime  ip addr  ipconfig  ifconfig  netstat\n  git rev-parse [--short] HEAD\n\nChallenges\n  case  challenges  hint <original|open-door>  submit <answer>\n  base64 -d <file-or-encoded-value>\n  Collect badges at /ctf/\n\nConsole\n  echo <text>  history  clear\n  Enter executes. Up/Down history. Tab completes. Ctrl+L clears.\n  Press Escape, then Tab to leave the terminal.\n\nTry: shell, ls -la, cd blog, ls\nThis is a read-only simulation; there are no real shell processes.";
+      if (
+        ["case", "challenges", "hint", "submit"].indexOf(command) >= 0 &&
+        !ctf
+      )
+        return "Challenges are unavailable. Reload the page to try again.";
+      if (command === "challenges") return ctf.status();
+      if (command === "hint") return ctf.hint(args[0]);
+      if (command === "submit")
+        return ctf.submit(args.join(" ")).then(function (result) {
+          return (
+            result.message +
+            (result.ok ? "\nCollect your rewards at /ctf/" : "")
+          );
+        });
       if (command === "clear") return null;
       if (command === "echo") return args.join(" ");
       if (command === "history")
@@ -228,6 +249,34 @@
         if (mode === "shell") return "Already in /bin/bash.";
         mode = "shell";
         return "Process 2481 created.\nChannel 1 created.\n/bin/bash";
+      }
+      if (command === "case") {
+        if (args.length) return "Usage: case (opens the current investigation)";
+        previous = cwd;
+        cwd = ctf.caseRoot;
+        save();
+        return read("brief.txt", "case");
+      }
+      if (command === "base64") {
+        if (args.length !== 2 || ["-d", "--decode"].indexOf(args[0]) < 0)
+          return "Usage: base64 -d <file-or-encoded-value>";
+        var source = has(resolve(args[1])) ? fs[resolve(args[1])] : args[1];
+        if (source === null) return "base64: " + args[1] + ": Is a directory";
+        source = source.replace(/\s/g, "");
+        if (
+          !source ||
+          source.length > 100000 ||
+          !/^[A-Za-z0-9+/]*={0,2}$/.test(source)
+        )
+          return "base64: Invalid encoded input. Use a file or paste only the encoded value.";
+        try {
+          var bytes = Uint8Array.from(atob(source), function (char) {
+            return char.charCodeAt(0);
+          });
+          return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+        } catch (_) {
+          return "base64: Invalid Base64 or UTF-8 text.";
+        }
       }
       if (command === "whoami") return "root";
       if (command === "getuid") return "Server username: root";
@@ -396,6 +445,11 @@
         return commands.filter(function (command) {
           return command.indexOf(last) === 0;
         });
+      if (words[0] === "submit") return [];
+      if (words[0] === "hint")
+        return ["original", "open-door"].filter(function (id) {
+          return id.indexOf(last) === 0;
+        });
       var slash = last.lastIndexOf("/"),
         prefix = slash < 0 ? "" : last.slice(0, slash + 1),
         partial = last.slice(slash + 1);
@@ -412,6 +466,13 @@
     }
     return {
       execute: execute,
+      isSubmission: function (raw) {
+        try {
+          return tokenize(raw)[0] === "submit";
+        } catch (_) {
+          return /^\s*submit(?:\s|$)/.test(raw);
+        }
+      },
       prompt: prompt,
       complete: complete,
       status: function () {

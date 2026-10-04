@@ -1,10 +1,10 @@
 #terminal-window {
-  background: #101519;
-  border: 1px solid #37443d;
-  border-radius: 14px;
+  background: #0c1410;
+  border: 1px solid #375140;
+  border-radius: 16px;
   box-shadow:
-    0 0 0 5px #d9ffe904,
-    0 20px 55px #0003;
+    0 0 0 5px #a1ddb503,
+    0 25px 70px #0005;
   overflow: hidden;
   font: 13px/1.85 var(--mono);
   color: #dce4df;
@@ -14,9 +14,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: #181e21;
+  background: #17211a;
   padding: 12px 21px;
-  border-bottom: 1px solid #343b42;
+  border-bottom: 1px solid #344238;
   min-height: 58px;
 }
 .terminal-title {
@@ -24,14 +24,14 @@
   gap: 10px;
   align-items: center;
   font-size: 11px;
-  color: #b1bac5;
+  color: #b7c4bb;
 }
 .terminal-led {
   width: 7px;
   height: 7px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--signal);
   box-shadow: 0 0 10px #94d8ad40;
 }
 [data-state="connecting"] .terminal-led {
@@ -43,15 +43,15 @@
 }
 #intro-control {
   font: 11px var(--mono);
-  border: 1px solid #3c4b42;
-  color: #b4ccbd;
+  border: 1px solid #496050;
+  color: #c3d3c8;
   border-radius: 6px;
   padding: 7px 11px;
   background: transparent;
   min-width: 115px;
 }
 #intro-control:hover {
-  border-color: var(--accent);
+  border-color: var(--signal);
   color: #d9efdf;
 }
 #intro-control span {
@@ -80,7 +80,7 @@
 }
 .term-green,
 .session-open {
-  color: var(--accent);
+  color: var(--signal);
 }
 .term-cyan {
   color: #97bfce;
@@ -90,11 +90,11 @@
 }
 .transfer {
   display: block;
-  color: var(--accent);
+  color: var(--signal);
   font-variant-numeric: tabular-nums;
 }
 .typed-cursor {
-  color: var(--accent);
+  color: var(--signal);
   animation: lab-caret 1s steps(1, end) infinite;
 }
 .terminal-footer {
@@ -102,22 +102,22 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 6px 20px;
-  background: #151b1c;
-  border-top: 1px solid #29342e;
+  background: #121e16;
+  border-top: 1px solid #2d4033;
   padding: 10px 21px;
   font-size: 10px;
-  color: #9eafa4;
+  color: #a9bdae;
 }
 .terminal-footer span:last-child {
-  color: #a9c4b2;
+  color: #b4cbbb;
 }
 .terminal-help {
-  font: 10px/1.9 var(--mono);
-  color: #a5b2aa;
-  margin: 12px 3px 0;
+  font: 11px/1.9 var(--mono);
+  color: #b9c8be;
+  margin: 17px 3px 0;
 }
 .terminal-help span {
-  color: #85958b;
+  color: #9eb1a5;
 }
 .terminal-help code {
   font-size: inherit;
@@ -143,6 +143,7 @@
 #meterpreter .terminal-output,
 #meterpreter .terminal-output > div > div {
   font: 13px/1.85 var(--mono);
+  font-variant-ligatures: none;
   color: #dce4df;
 }
 #meterpreter .terminal-output > div > div {
@@ -150,7 +151,7 @@
   overflow-wrap: anywhere;
 }
 #meterpreter .prompt {
-  color: var(--accent);
+  color: var(--signal);
 }
 #meterpreter .cmd {
   line-height: 1.85;
@@ -159,24 +160,24 @@
   background: transparent;
 }
 #meterpreter .cursor {
-  color: var(--accent);
+  color: var(--signal);
 }
 #meterpreter .cursor.blink {
   animation: lab-caret 1s steps(1, end) infinite;
 }
 #meterpreter .terminal-output a {
-  color: var(--accent);
+  color: var(--signal);
 }
 @keyframes lab-caret {
   0%,
   49% {
-    background: var(--accent);
+    background: var(--signal);
     color: #101519;
   }
   50%,
   100% {
     background: transparent;
-    color: var(--accent);
+    color: var(--signal);
   }
 }
 @media (max-width: 700px) {
@@ -213,7 +214,7 @@
   .typed-cursor,
   #meterpreter .cursor.blink {
     animation: none;
-    background: var(--accent);
+    background: var(--signal);
     color: #101519;
   }
 }

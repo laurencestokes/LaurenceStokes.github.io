@@ -4,4 +4,4 @@ title: Blog
 permalink: /blog/
 ---
 <header class="page-heading"><p class="eyebrow">Notes from the lab</p><h1>Blog</h1><p>Adventures in software, security, and the things I learn along the way.</p></header>
-<div class="card-grid blog-grid">{% for post in site.posts %}{% include post-card.html %}{% endfor %}</div>
+<div class="card-grid blog-grid">{% for post in site.posts %}{% include post-card.html heading="h2" %}{% endfor %}</div>

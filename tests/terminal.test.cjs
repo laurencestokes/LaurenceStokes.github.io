@@ -4,12 +4,14 @@ const fs = require("node:fs");
 const vm = require("node:vm");
 const path = require("node:path");
 
-function createShell() {
+function createShell(ctf) {
   const context = {
     window: {},
     sessionStorage: { getItem: () => null, setItem: () => {} },
     Intl,
     Date,
+    atob,
+    TextDecoder,
   };
   vm.runInNewContext(
     fs.readFileSync(path.join(__dirname, "../scripts/lab-shell.js"), "utf8"),
@@ -30,6 +32,7 @@ function createShell() {
     },
     { ip: "Unavailable", local: "Unavailable", provider: "Unavailable" },
     { "legacy.txt": "Preserved content" },
+    ctf,
   );
 }
 
@@ -54,6 +57,45 @@ test("paths, file readers and completion use the same filesystem", () => {
   assert.match(run("tree /home/visitor"), /note.txt/);
   run("cd ~");
   assert.equal(run("pwd"), "/home/visitor");
+});
+
+test("investigation evidence uses normal shell paths, readers and decoding", async () => {
+  const evidence = "/cases/example",
+    ctf = {
+      caseRoot: evidence,
+      files: {
+        [evidence + "/brief.txt"]: "A fictional test case\n",
+        [evidence + "/logs/events.txt"]: "normal event\ncorrelated event\n",
+        [evidence + "/backup/.note"]:
+          Buffer.from("Recovered ✓").toString("base64"),
+      },
+      status: () => "0/8 flags",
+      hint: (id) => "Hint for " + id,
+      submit: async (answer) => ({
+        ok: answer === "synthetic fixture",
+        message: "Checked fixture",
+      }),
+    };
+  const shell = createShell(ctf),
+    run = (input) => shell.execute(input, []);
+  assert.equal(run("case"), "A fictional test case");
+  assert.equal(run("pwd"), evidence);
+  assert.match(run("ls"), /backup\//);
+  assert.equal(run("grep correlated logs/events.txt"), "correlated event");
+  assert.doesNotMatch(run("ls backup"), /\.note/);
+  assert.match(run("ls -la backup"), /\.note/);
+  assert.equal(run("base64 -d backup/.note"), "Recovered ✓");
+  assert.equal(run("base64 --decode aGVsbG8="), "hello");
+  assert.match(run("base64 -d ###"), /Invalid/);
+  assert.match(run("base64 -d /w=="), /Invalid/);
+  assert.match(run("base64 -d logs"), /directory/);
+  assert.equal(run("hint open-door"), "Hint for open-door");
+  assert.match(await run('submit "synthetic fixture"'), /Checked fixture/);
+  assert.equal(shell.isSubmission('s"ub"mit fixture'), true);
+  assert.deepEqual(Array.from(shell.complete("submit ")), []);
+  run("background");
+  assert.match(run("case"), /Select a session/);
+  assert.equal(run("challenges"), "0/8 flags");
 });
 
 test("session transitions preserve cwd and do not expose a closed shell", () => {

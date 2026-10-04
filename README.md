@@ -21,10 +21,18 @@ Replay preserves command history and working directory while reconnecting the si
 Run the filesystem/session regression checks with Node:
 
 ```sh
-node --test tests/terminal.test.cjs
+node --test tests/*.test.cjs
 ```
 
 Browser verification should cover normal and reduced motion, the full transcript and upload counter, native history/completion, skip/replay, visitor lookup failures, narrow screens, navigation and the existing challenge behavior. `tests` is excluded from Jekyll output.
+
+## Challenges
+
+`/ctf/` accepts the original five-part phrase and the three flags from the terminal investigation. The `case` command opens the current case; `challenges`, `hint`, `submit`, and `base64 -d` support the investigation. The submission page and terminal share progress, including across tabs.
+
+`scripts/ctf-content.js` contains the encoded evidence and answer digests. Keep decoded authoring material and walkthroughs outside the repository. `scripts/ctf.js` checks normalized answers with SHA-256 and saves only completion timestamps and hint counts in localStorage. Submitted answers are omitted from terminal history. Downloadable SVG badges unlock for each completed challenge and for all eight flags.
+
+This is a personal, browser-local game, not a trusted scoreboard. Progress can be reset, cleared with browser data, or edited by the visitor; no account or submission service is involved. If storage is blocked, progress lasts only for the visit. Answer checking requires a secure browser context (HTTPS or localhost).
 
 ## License
 
